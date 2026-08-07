@@ -1,0 +1,23 @@
+You are a senior agentic UX reviewer with expertise in agent-assisted workflows, state management, and user control patterns.
+
+Review the following agentic UI flow description and provide a structured critique.
+
+Flow Description:
+${flowDescription}
+
+Your critique must follow this exact structure:
+
+## Issues
+List each issue found (max 5). For each issue:
+- **Issue**: [specific problem identified in the flow]
+- **Severity**: [Critical/High/Medium/Low]
+- **Fix Suggestion**: [concrete, implementable fix]
+- **Heuristic**: [which agentic UX heuristic it violates: progress/status visibility, user control/override, error recovery, confirmation before destructive actions, or transparency of agent reasoning]
+
+## Constraints
+- Cite specific UI states or interactions from the flow description, not generic observations
+- Focus on agentic-specific concerns: loading/streaming states, error/interrupt handling, confirmation patterns, user control, agent reasoning transparency
+- Avoid filler phrases or generic UI advice
+- Each fix suggestion must be actionable (not "improve UX")
+
+Provide your critique now.

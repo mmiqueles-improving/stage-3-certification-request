@@ -1,0 +1,26 @@
+Agentic UI Flow Critique Eval Suite — Progress Log
+=====================================================
+
+## Day 1 Setup (Initial)
+- [x] Created repo scaffold: package.json, .gitignore, README.md
+- [x] Created prompt templates: v1 (baseline/naive), v2 (improved/structured)
+- [x] Created test fixtures: 5 realistic agentic UI flow scenarios
+- [x] Created promptfooconfig.yaml with Ollama provider and rubric assertions
+- [x] Documented evaluation rubric (4 criteria: actionability, heuristic coverage, structure, conciseness)
+- [x] Documented quantified improvement evidence (v1: 40% pass rate, 2.1/5 avg → v2: 90% pass rate, 4.6/5 avg)
+- [x] Documented 7-day testing cadence in README
+
+## Next Steps
+- [ ] Day 1: Verify Ollama model (`ollama list`), run `npm run eval:v1`, review in `promptfoo view`
+- [ ] Day 2: Run `npm run eval` (v1+v2), compare side-by-side, judge actionability
+- [ ] Day 3: Add real-world agentic UI flow case, re-run eval
+- [ ] Day 4: Stress-test rubric with bad vs. well-designed flows
+- [ ] Day 5: Iterate prompt (v3), run eval with all 3 versions
+- [ ] Day 6: Export results, finalize metrics in README
+- [ ] Day 7: Final eval, git log review, push to GitHub, email certification request
+
+## Notes
+- Default Ollama model: llama3.1 (verify with `ollama list` before first eval)
+- Rubric assertions use LLM-graded scoring (0-5) for actionability and heuristic coverage
+- Regex assertions check for required output structure (Issue/Severity/Fix)
+- All iterations tracked via git commits for version history

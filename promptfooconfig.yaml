@@ -1,0 +1,101 @@
+prompts:
+  - file:///Users/mario.miqueles/Documents/improving-certification-stage-3/prompts/v1-flow-critique.txt
+  - file:///Users/mario.miqueles/Documents/improving-certification-stage-3/prompts/v2-flow-critique.txt
+
+providers:
+  - id: ollama:chat:llama3.1
+    config:
+      baseUrl: http://localhost:11434
+
+tests:
+  - vars:
+      flowDescription: |
+        Multi-step data processing agent: User uploads a CSV file. The agent begins parsing and processing the data across 5 sequential steps (validation, cleaning, transformation, analysis, export). The UI shows a generic "Processing..." message that doesn't update. After 2 minutes, the user has no idea which step is running or how much longer to wait. There's no cancel button. If an error occurs mid-process, the user sees only "Error occurred" with no guidance on recovery.
+    assertions:
+      - type: llm-rubric
+        value: |
+          Score the response on actionability (0-5): Does it provide concrete, implementable fix suggestions specific to this flow (not generic advice)?
+          Examples of concrete: "Add a progress bar showing current step (e.g., 'Step 2/5: Cleaning data') with estimated time remaining"
+          Examples of generic: "Improve the user experience" or "Add better feedback"
+          Return only the score.
+      - type: llm-rubric
+        value: |
+          Score the response on coverage of agentic UX heuristics (0-5): Does it address relevant heuristics like progress/status visibility, user control/interrupt, error recovery, confirmation patterns, or transparency?
+          Return only the score.
+      - type: regex
+        value: "Issue|Severity|Fix"
+        invert: false
+      - type: not-contains
+        value: "improve the experience"
+
+  - vars:
+      flowDescription: |
+        Chat-based expense reporting agent: User types "approve all expenses from last month." The agent immediately executes the approval without showing a summary, confirmation dialog, or breakdown of which expenses will be approved. The action is destructive (irreversible in the system) and the user only realizes what happened after the fact.
+    assertions:
+      - type: llm-rubric
+        value: |
+          Score the response on actionability (0-5): Does it provide concrete, implementable fix suggestions specific to this flow (not generic advice)?
+          Return only the score.
+      - type: llm-rubric
+        value: |
+          Score the response on coverage of agentic UX heuristics (0-5): Does it address relevant heuristics like confirmation before destructive actions, user control, or transparency?
+          Return only the score.
+      - type: regex
+        value: "Issue|Severity|Fix"
+        invert: false
+      - type: not-contains
+        value: "improve the experience"
+
+  - vars:
+      flowDescription: |
+        Streaming response UI: User asks the agent a complex question. The agent streams a long response token-by-token to the UI. While streaming, there's no visible way to interrupt or cancel the response. If the user realizes mid-stream that the agent is going off-track, they must wait for the full response to complete before they can correct it.
+    assertions:
+      - type: llm-rubric
+        value: |
+          Score the response on actionability (0-5): Does it provide concrete, implementable fix suggestions specific to this flow (not generic advice)?
+          Return only the score.
+      - type: llm-rubric
+        value: |
+          Score the response on coverage of agentic UX heuristics (0-5): Does it address relevant heuristics like user control/interrupt, error recovery, or transparency?
+          Return only the score.
+      - type: regex
+        value: "Issue|Severity|Fix"
+        invert: false
+      - type: not-contains
+        value: "improve the experience"
+
+  - vars:
+      flowDescription: |
+        Agent handoff with poor error state: User initiates a task that requires the agent to hand off to a human specialist. The handoff fails silently. The UI shows no indication that the handoff was attempted, failed, or what the user should do next. No error message, no retry option, no fallback contact info.
+    assertions:
+      - type: llm-rubric
+        value: |
+          Score the response on actionability (0-5): Does it provide concrete, implementable fix suggestions specific to this flow (not generic advice)?
+          Return only the score.
+      - type: llm-rubric
+        value: |
+          Score the response on coverage of agentic UX heuristics (0-5): Does it address relevant heuristics like error recovery, transparency, or user control?
+          Return only the score.
+      - type: regex
+        value: "Issue|Severity|Fix"
+        invert: false
+      - type: not-contains
+        value: "improve the experience"
+
+  - vars:
+      flowDescription: |
+        Transparent agent reasoning: User asks the agent to recommend a product. The agent returns a recommendation with no explanation of its reasoning, data sources, or confidence level. The user has no way to understand why this product was chosen or to override the recommendation with their own criteria.
+    assertions:
+      - type: llm-rubric
+        value: |
+          Score the response on actionability (0-5): Does it provide concrete, implementable fix suggestions specific to this flow (not generic advice)?
+          Return only the score.
+      - type: llm-rubric
+        value: |
+          Score the response on coverage of agentic UX heuristics (0-5): Does it address relevant heuristics like transparency of agent reasoning or user control/override?
+          Return only the score.
+      - type: regex
+        value: "Issue|Severity|Fix"
+        invert: false
+      - type: not-contains
+        value: "improve the experience"

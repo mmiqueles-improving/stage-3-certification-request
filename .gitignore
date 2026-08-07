@@ -1,0 +1,8 @@
+node_modules/
+.promptfoo/
+.promptfoorc
+promptfoo-results/
+results/
+*.json
+*.csv
+.DS_Store
