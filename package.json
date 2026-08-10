@@ -1,0 +1,23 @@
+{
+  "name": "agentic-ui-flow-critique-eval",
+  "version": "1.0.0",
+  "description": "Promptfoo-based evaluation suite for agentic UI flow/state critique prompt",
+  "main": "index.js",
+  "scripts": {
+    "eval": "promptfoo eval --config promptfooconfig.yaml",
+    "eval:v1": "promptfoo eval --config promptfooconfig.yaml",
+    "eval:v2": "promptfoo eval --config promptfooconfig.yaml",
+    "view": "promptfoo view --config promptfooconfig.yaml"
+  },
+  "keywords": [
+    "promptfoo",
+    "evaluation",
+    "agentic-ui",
+    "critique"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "promptfoo": "^0.122.0"
+  }
+}
