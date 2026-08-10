@@ -78,36 +78,44 @@ This opens a local web interface showing scores, outputs, and side-by-side compa
 
 ## Evaluation Rubric
 
-Each test case is scored on four criteria:
+Each test case is scored on four criteria (`promptfooconfig.yaml` → `defaultTest.assert`):
 
-1. **Actionability** (0–5): Does the critique provide concrete, implementable fix suggestions specific to the flow (not generic advice)?
+1. **Actionability** (pass/fail, `llm-rubric` graded by the local Ollama model): Does the critique provide at least 3 concrete, implementable fix suggestions that reference specific UI states/interactions from the flow (not generic advice)?
    - Example concrete: "Add a progress bar showing 'Step 2/5: Cleaning data' with estimated time remaining"
    - Example generic: "Improve the user experience"
 
-2. **Coverage of Agentic UX Heuristics** (0–5): Does it address relevant heuristics?
+2. **Coverage of Agentic UX Heuristics** (pass/fail, deterministic keyword count via `javascript` assertion — requires ≥2 of 5 to pass):
    - Progress/status visibility
    - User control and override capability
    - Error recovery guidance
    - Confirmation before destructive actions
    - Transparency of agent reasoning
 
-3. **Structure/Consistency** (binary): Does output follow the required format (Issue / Severity / Fix)?
-   - Checked via regex assertion for presence of these keywords
+   Note: this was originally an `llm-rubric` ("count how many topics are mentioned"), but the local grading model (2GB `llama3.2`) proved unreliable at counting/enumeration tasks. It's now a deterministic keyword match against the fixed, closed set of heuristic names the v2 prompt requires, which is both more accurate and doesn't depend on the local model's reasoning.
 
-4. **Conciseness** (binary): No filler phrases, bounded length
-   - Checked via `not-contains` assertion for generic phrases
+3. **Structure/Consistency** (binary): Does the output contain the literal `**Issue**`/`## Issues`, `**Severity**`, and `**Fix Suggestion**`/`**Fix**` markdown markers (all three required)?
+   - Checked via 3 separate `regex` assertions. Requiring all three (rather than an OR of loose words like "issue"/"fix") avoids false passes from v1's free-form prose incidentally containing those words.
+
+4. **Conciseness** (binary): No filler phrases
+   - Checked via multiple `not-icontains` assertions for phrases that are unambiguously generic in any context (e.g. "improve the experience"). Single words like "user-friendly" were deliberately excluded from this list since they can appear inside an otherwise concrete, specific suggestion.
+
+**Grading provider**: all model-graded (`llm-rubric`) assertions run against the local Ollama model (`ollama:chat:llama3.2`), set via `defaultTest.options.provider`, so the whole suite runs offline with no `OPENAI_API_KEY` required.
 
 ## Quantified Improvement Evidence
 
+Measured via `npm run eval` on 2026-08-10 (Ollama `llama3.2`, 5 real-world agentic UI flow fixtures, both prompts graded against the same 4-criteria rubric above):
+
 ### Baseline (v1)
-- **Pass rate**: 40% (2/5 test cases meet all criteria)
-- **Average rubric score**: 2.1/5 across actionability and heuristic coverage
+- **Pass rate**: 0% (0/5 test cases meet all criteria)
+- v1 fails the structure check every time (it was never instructed to use an Issue/Severity/Fix format), and its critiques tend to lean on generic framing ("...to improve the user experience") even when some individual suggestions are reasonable.
 
 ### Improved (v2)
-- **Pass rate**: 90% (4.5/5 test cases meet all criteria on average)
-- **Average rubric score**: 4.6/5 across actionability and heuristic coverage
+- **Pass rate**: 100% (5/5 test cases meet all criteria)
+- v2 consistently follows the required structure, cites specific UI states from each flow, and labels each issue with a specific heuristic.
 
-**Improvement**: +50 percentage points in pass rate, +2.5 points in average rubric score (120% improvement in overall quality).
+**Improvement**: +100 percentage points in pass rate (0% → 100%) on this rubric and fixture set. Full per-assertion results are in `results/day1-results.json`.
+
+Note: pass/fail here is intentionally strict — it requires meeting every criterion simultaneously (structure AND actionability AND heuristic coverage AND no filler). This is a demonstration rubric across 5 fixtures on a single local model; treat the percentages as directional evidence for this suite, not a universal quality score.
 
 ## Version History
 

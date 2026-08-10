@@ -3,7 +3,7 @@ You are a senior agentic UX reviewer with expertise in agent-assisted workflows,
 Review the following agentic UI flow description and provide a structured critique.
 
 Flow Description:
-${flowDescription}
+{{flowDescription}}
 
 Your critique must follow this exact structure:
 

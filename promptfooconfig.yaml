@@ -3,99 +3,72 @@ prompts:
   - file:///Users/mario.miqueles/Documents/improving-certification-stage-3/prompts/v2-flow-critique.txt
 
 providers:
-  - id: ollama:chat:llama3.1
+  - id: ollama:chat:llama3.2
     config:
       baseUrl: http://localhost:11434
 
-tests:
-  - vars:
-      flowDescription: |
-        Multi-step data processing agent: User uploads a CSV file. The agent begins parsing and processing the data across 5 sequential steps (validation, cleaning, transformation, analysis, export). The UI shows a generic "Processing..." message that doesn't update. After 2 minutes, the user has no idea which step is running or how much longer to wait. There's no cancel button. If an error occurs mid-process, the user sees only "Error occurred" with no guidance on recovery.
-    assertions:
-      - type: llm-rubric
-        value: |
-          Score the response on actionability (0-5): Does it provide concrete, implementable fix suggestions specific to this flow (not generic advice)?
-          Examples of concrete: "Add a progress bar showing current step (e.g., 'Step 2/5: Cleaning data') with estimated time remaining"
-          Examples of generic: "Improve the user experience" or "Add better feedback"
-          Return only the score.
-      - type: llm-rubric
-        value: |
-          Score the response on coverage of agentic UX heuristics (0-5): Does it address relevant heuristics like progress/status visibility, user control/interrupt, error recovery, confirmation patterns, or transparency?
-          Return only the score.
-      - type: regex
-        value: "Issue|Severity|Fix"
-        invert: false
-      - type: not-contains
-        value: "improve the experience"
+# Grade model-graded assertions (llm-rubric) with the local Ollama model too,
+# since this suite is designed to run fully offline (no OPENAI_API_KEY available).
+defaultTest:
+  options:
+    provider:
+      id: ollama:chat:llama3.2
+      config:
+        baseUrl: http://localhost:11434
+  assert:
+    - type: llm-rubric
+      value: |
+        The critique provides at least 3 concrete, implementable fix suggestions that reference
+        specific UI states or interactions from the flow description (e.g., a specific button,
+        message, timing, or step). Generic advice such as "improve the experience," "add better
+        feedback," or "make it more user-friendly" does NOT count as concrete.
+    # Heuristic coverage: this used to be an llm-rubric ("count how many of these 5 topics are
+    # mentioned"), but the local 2GB grading model (llama3.2) proved unreliable at counting/
+    # enumeration - it under-counted a critique that explicitly labeled 3 distinct heuristics as
+    # "only 1 topic mentioned". Since the v2 template requires labeling each issue with one of a
+    # fixed, closed set of 5 heuristic names, a deterministic keyword count is both more accurate
+    # and doesn't depend on the local model's reasoning ability.
+    - type: javascript
+      value: |
+        const categories = [
+          /progress|status visib/i,
+          /user control|override|interrupt/i,
+          /error recovery/i,
+          /confirmation/i,
+          /transparency/i,
+        ];
+        const matched = categories.filter((re) => re.test(output));
+        return {
+          pass: matched.length >= 2,
+          score: matched.length / categories.length,
+          reason: `${matched.length}/5 agentic UX heuristics mentioned`,
+        };
+    # Structural check: require ALL THREE markers (not just any one word), so v1's free-form
+    # prose (which incidentally contains words like "issue" or "fix") won't pass by accident.
+    # Note: plain JS RegExp does not support inline flags like (?i), so case is matched exactly
+    # against the fixed capitalization used in the v2 prompt template.
+    - type: regex
+      value: "\\*\\*Issue\\*\\*|## Issues"
+    - type: regex
+      value: "\\*\\*Severity\\*\\*"
+    - type: regex
+      value: "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+    # Broader generic-filler check, split into separate case-insensitive "not-icontains" checks.
+    # Deliberately limited to phrases that are ALWAYS filler regardless of context (e.g. "improve
+    # the experience" is never a concrete fix). Single words like "user-friendly" or "better UI"
+    # were dropped from this list because they can appear inside an otherwise concrete, specific
+    # suggestion (e.g. "add a user-friendly progress bar showing step X/5") and produced false
+    # negatives. Genuine vagueness is instead caught by the actionability llm-rubric above, which
+    # judges the full sentence/context rather than banning individual words.
+    - type: not-icontains
+      value: "improve the experience"
+    - type: not-icontains
+      value: "improve the user experience"
+    - type: not-icontains
+      value: "enhance the experience"
+    - type: not-icontains
+      value: "enhance the user experience"
+    - type: not-icontains
+      value: "add better feedback"
 
-  - vars:
-      flowDescription: |
-        Chat-based expense reporting agent: User types "approve all expenses from last month." The agent immediately executes the approval without showing a summary, confirmation dialog, or breakdown of which expenses will be approved. The action is destructive (irreversible in the system) and the user only realizes what happened after the fact.
-    assertions:
-      - type: llm-rubric
-        value: |
-          Score the response on actionability (0-5): Does it provide concrete, implementable fix suggestions specific to this flow (not generic advice)?
-          Return only the score.
-      - type: llm-rubric
-        value: |
-          Score the response on coverage of agentic UX heuristics (0-5): Does it address relevant heuristics like confirmation before destructive actions, user control, or transparency?
-          Return only the score.
-      - type: regex
-        value: "Issue|Severity|Fix"
-        invert: false
-      - type: not-contains
-        value: "improve the experience"
-
-  - vars:
-      flowDescription: |
-        Streaming response UI: User asks the agent a complex question. The agent streams a long response token-by-token to the UI. While streaming, there's no visible way to interrupt or cancel the response. If the user realizes mid-stream that the agent is going off-track, they must wait for the full response to complete before they can correct it.
-    assertions:
-      - type: llm-rubric
-        value: |
-          Score the response on actionability (0-5): Does it provide concrete, implementable fix suggestions specific to this flow (not generic advice)?
-          Return only the score.
-      - type: llm-rubric
-        value: |
-          Score the response on coverage of agentic UX heuristics (0-5): Does it address relevant heuristics like user control/interrupt, error recovery, or transparency?
-          Return only the score.
-      - type: regex
-        value: "Issue|Severity|Fix"
-        invert: false
-      - type: not-contains
-        value: "improve the experience"
-
-  - vars:
-      flowDescription: |
-        Agent handoff with poor error state: User initiates a task that requires the agent to hand off to a human specialist. The handoff fails silently. The UI shows no indication that the handoff was attempted, failed, or what the user should do next. No error message, no retry option, no fallback contact info.
-    assertions:
-      - type: llm-rubric
-        value: |
-          Score the response on actionability (0-5): Does it provide concrete, implementable fix suggestions specific to this flow (not generic advice)?
-          Return only the score.
-      - type: llm-rubric
-        value: |
-          Score the response on coverage of agentic UX heuristics (0-5): Does it address relevant heuristics like error recovery, transparency, or user control?
-          Return only the score.
-      - type: regex
-        value: "Issue|Severity|Fix"
-        invert: false
-      - type: not-contains
-        value: "improve the experience"
-
-  - vars:
-      flowDescription: |
-        Transparent agent reasoning: User asks the agent to recommend a product. The agent returns a recommendation with no explanation of its reasoning, data sources, or confidence level. The user has no way to understand why this product was chosen or to override the recommendation with their own criteria.
-    assertions:
-      - type: llm-rubric
-        value: |
-          Score the response on actionability (0-5): Does it provide concrete, implementable fix suggestions specific to this flow (not generic advice)?
-          Return only the score.
-      - type: llm-rubric
-        value: |
-          Score the response on coverage of agentic UX heuristics (0-5): Does it address relevant heuristics like transparency of agent reasoning or user control/override?
-          Return only the score.
-      - type: regex
-        value: "Issue|Severity|Fix"
-        invert: false
-      - type: not-contains
-        value: "improve the experience"
+tests: file://testcases/fixtures.yaml

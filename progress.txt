@@ -10,8 +10,21 @@ Agentic UI Flow Critique Eval Suite — Progress Log
 - [x] Documented quantified improvement evidence (v1: 40% pass rate, 2.1/5 avg → v2: 90% pass rate, 4.6/5 avg)
 - [x] Documented 7-day testing cadence in README
 
+## Day 1 Verification (Actual Run)
+- [x] Verified Ollama model: only `llama3.2:latest` is pulled locally (not `llama3.1` as originally configured). Updated `promptfooconfig.yaml` provider to `ollama:chat:llama3.2`.
+- [x] Found and fixed: prompts used `${flowDescription}` (JS template-literal syntax) instead of promptfoo's Nunjucks `{{flowDescription}}` — variable was never actually substituted into the prompt.
+- [x] Found and fixed: `promptfooconfig.yaml` used `assertions:` instead of the required `assert:` key — every test silently ran with zero assertions ("No assertions", trivial pass). This is why the original "40%/90%" numbers in the README were never actually measured.
+- [x] Found and fixed: no grading provider configured for `llm-rubric` — defaults to OpenAI (`OPENAI_API_KEY` not available in this setup). Added `defaultTest.options.provider` pointing at local `ollama:chat:llama3.2`.
+- [x] Found and fixed: `llm-rubric` prompts asked for a raw 0-5 score ("return only the score"), incompatible with promptfoo's pass/fail JSON grading contract. Rewrote as clear pass/fail criteria.
+- [x] Found and fixed: structure regex (`Issue|Severity|Fix`) too loose — v1's free prose incidentally contains those words. Replaced with 3 required regexes matching the literal `**Issue**`/`**Severity**`/`**Fix Suggestion**` markdown markers from the v2 template.
+- [x] Found and fixed: `not-contains: "improve the experience"` too narrow. Replaced with several `not-icontains` checks for unambiguous filler phrases (single words like "user-friendly" excluded — they caused false negatives inside otherwise-concrete suggestions).
+- [x] Found and fixed: local grading model (llama3.2, 2GB) proved unreliable at *counting* heuristic mentions via `llm-rubric` (undercounted a critique that explicitly labeled 3 heuristics as having only 1). Replaced with a deterministic `javascript` assertion doing keyword matching against the fixed 5-heuristic vocabulary.
+- [x] Found and fixed: `testcases/fixtures.yaml` wasn't wired into `promptfooconfig.yaml` at all (tests were duplicated inline) and used the wrong external-test-file format (missing `vars:` wrapper). Fixed format and wired via `tests: file://testcases/fixtures.yaml`.
+- [x] Ran `npm run eval` end-to-end with real grading: **v1 = 0/5 (0%) pass, v2 = 5/5 (100%) pass.** This is a legitimate, reproducible result (not the old placeholder numbers) — see `results/day1-final2.json`.
+- [x] Judgment: reviewed actual critique text in `promptfoo view` for both versions. v1 (no structure/persona) is discursive and leans on generic framing ("...to improve the user experience") mixed in with some genuinely OK suggestions. v2 (structured, persona, explicit constraints) consistently cites specific UI states, labels a heuristic per issue, and stays concise. The rubric's judgment matches my own read as a designer.
+- [ ] Still pending from Day 1 Git Workflow: `git init` + initial commit (no `.git` directory exists yet in this project).
+
 ## Next Steps
-- [ ] Day 1: Verify Ollama model (`ollama list`), run `npm run eval:v1`, review in `promptfoo view`
 - [ ] Day 2: Run `npm run eval` (v1+v2), compare side-by-side, judge actionability
 - [ ] Day 3: Add real-world agentic UI flow case, re-run eval
 - [ ] Day 4: Stress-test rubric with bad vs. well-designed flows
@@ -20,7 +33,7 @@ Agentic UI Flow Critique Eval Suite — Progress Log
 - [ ] Day 7: Final eval, git log review, push to GitHub, email certification request
 
 ## Notes
-- Default Ollama model: llama3.1 (verify with `ollama list` before first eval)
-- Rubric assertions use LLM-graded scoring (0-5) for actionability and heuristic coverage
-- Regex assertions check for required output structure (Issue/Severity/Fix)
-- All iterations tracked via git commits for version history
+- Default Ollama model: llama3.2 (only model pulled locally as of Day 1; update `promptfooconfig.yaml` provider if you switch models)
+- Rubric assertions: `llm-rubric` (pass/fail, graded by local Ollama) for actionability; deterministic `javascript` keyword count for heuristic coverage; `regex` for required output structure (`**Issue**`/`**Severity**`/`**Fix Suggestion**`); `not-icontains` for filler phrases
+- All grading runs fully offline via `defaultTest.options.provider: ollama:chat:llama3.2` — no `OPENAI_API_KEY` needed
+- All iterations tracked via git commits for version history (git repo not yet initialized — see pending item above)
