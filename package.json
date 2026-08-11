@@ -7,7 +7,7 @@
     "eval": "promptfoo eval --config promptfooconfig.yaml",
     "eval:v1": "promptfoo eval --config promptfooconfig.yaml --filter-prompts v1-flow-critique",
     "eval:v2": "promptfoo eval --config promptfooconfig.yaml --filter-prompts v2-flow-critique",
-    "view": "promptfoo view --config promptfooconfig.yaml"
+    "view": "promptfoo view"
   },
   "keywords": [
     "promptfoo",

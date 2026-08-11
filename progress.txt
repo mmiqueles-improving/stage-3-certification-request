@@ -24,8 +24,20 @@ Agentic UI Flow Critique Eval Suite — Progress Log
 - [x] Judgment: reviewed actual critique text in `promptfoo view` for both versions. v1 (no structure/persona) is discursive and leans on generic framing ("...to improve the user experience") mixed in with some genuinely OK suggestions. v2 (structured, persona, explicit constraints) consistently cites specific UI states, labels a heuristic per issue, and stays concise. The rubric's judgment matches my own read as a designer.
 - [ ] Still pending from Day 1 Git Workflow: `git init` + initial commit (no `.git` directory exists yet in this project).
 
+## Day 2 — Introduce v2, Compare
+- [x] `npm run eval` (v1+v2 combined) was already run on Day 1; reviewed the results side-by-side today in `promptfoo view`.
+- [x] Observation: the difference between v1 and v2 output is notorious/obvious — driven almost entirely by the structure and detail each prompt template asks for, not just model variance.
+- [x] Both v1 and v2 critiques contained suggestions, but only v2's prompt explicitly requires a labeled field for it: `**Fix Suggestion**: [concrete, implementable fix]`. v1 never asks for this, so its suggestions are buried in free-form prose.
+- [x] Judgment: v2 is meaningfully better at turning critique into actionable items, because its prompt also requires "Issue," "Severity," and a named "heuristic" per item as a structured list — for design critique, a structured checklist beats one big paragraph.
+- [x] Result: all 5 v1 cases failed, all 5 v2 cases passed. This is driven by (a) v1 having no structure/persona at all, and (b) the rubric being simple — see limitation below.
+- [ ] **Rubric limitation identified**: of the 4 assertions in `defaultTest.assert`, only 1 (actionability) is actually LLM-graded (`llm-rubric`), and it's binary pass/fail — not a graded scale. This means the rubric can tell us both prompts passed/failed a low bar, but can't distinguish "v2 is clearly better" from "v2 is only marginally better" than v1. Next step: either move to a graded 1–5 `llm-rubric` scale (promptfoo supports a `threshold` on rubric scores) or add more finer-grained rubric assertions.
+
+## Action Items for Day 3
+- [ ] Adjust the rubric per the limitation above (graded scale and/or additional finer-grained `llm-rubric` assertions).
+- [ ] Add a real-world agentic UI flow case to `testcases/fixtures.yaml` (per README Day 3 task), re-run eval.
+
 ## Next Steps
-- [ ] Day 2: Run `npm run eval` (v1+v2), compare side-by-side, judge actionability
+- [x] Day 2: Run `npm run eval` (v1+v2), compare side-by-side, judge actionability
 - [ ] Day 3: Add real-world agentic UI flow case, re-run eval
 - [ ] Day 4: Stress-test rubric with bad vs. well-designed flows
 - [ ] Day 5: Iterate prompt (v3), run eval with all 3 versions
