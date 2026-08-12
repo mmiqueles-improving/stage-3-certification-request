@@ -17,3 +17,7 @@
 - vars:
     flowDescription: |
       Transparent agent reasoning: User asks the agent to recommend a product. The agent returns a recommendation with no explanation of its reasoning, data sources, or confidence level. The user has no way to understand why this product was chosen or to override the recommendation with their own criteria.
+
+- vars:
+    flowDescription: |
+      Hidden confidence and provenance gap: User asks a legal research agent to draft a contract risk analysis. The agent returns a finalized bulleted summary with no inline citations, no confidence scores, and no indication of which clauses were extracted directly from the source documents versus inferred by the model. The user has no way to verify individual claims or flag low-confidence assertions before relying on the analysis for a legal decision.

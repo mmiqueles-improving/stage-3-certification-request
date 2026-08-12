@@ -33,19 +33,35 @@ Agentic UI Flow Critique Eval Suite — Progress Log
 - [ ] **Rubric limitation identified**: of the 4 assertions in `defaultTest.assert`, only 1 (actionability) is actually LLM-graded (`llm-rubric`), and it's binary pass/fail — not a graded scale. This means the rubric can tell us both prompts passed/failed a low bar, but can't distinguish "v2 is clearly better" from "v2 is only marginally better" than v1. Next step: either move to a graded 1–5 `llm-rubric` scale (promptfoo supports a `threshold` on rubric scores) or add more finer-grained rubric assertions.
 
 ## Action Items for Day 3
-- [ ] Adjust the rubric per the limitation above (graded scale and/or additional finer-grained `llm-rubric` assertions).
-- [ ] Add a real-world agentic UI flow case to `testcases/fixtures.yaml` (per README Day 3 task), re-run eval.
+- [x] Adjust the rubric per the limitation above (graded scale and/or additional finer-grained `llm-rubric` assertions).
+- [x] Add a real-world agentic UI flow case to `testcases/fixtures.yaml` (per README Day 3 task), re-run eval.
+
+## Day 3 — Real-world Case + Rubric Split
+- [x] Split the single binary "actionability" `llm-rubric` into two named binary sub-criteria: `actionability-specificity` (fixes reference concrete UI states) and `actionability-concreteness` (≥3 implementable, non-generic fixes). Kept both binary (not a 1-5 score), per decision to avoid the local `llama3.2` model's known weakness with numeric/counting judgments (Day 1 finding).
+- [x] Added `metric` names to every assertion (`heuristic-coverage`, `structure-issue-marker/severity-marker/fix-marker`, `filler-phrase-check`) so `promptfoo view` now shows a labeled result per criterion instead of one lumped score — this was the main ask for "finer resolution."
+- [x] Added a 6th real-world fixture: "Hidden confidence and provenance gap" — a legal research agent producing a contract risk analysis with no inline citations, confidence scores, or source attribution, so the user can't verify claims before relying on it for a legal decision. Complements the existing "Transparent agent reasoning" fixture with a different, higher-stakes domain (legal) and a provenance/verifiability angle rather than just "confidence level."
+- [x] Ran `npm run eval` (6 fixtures × 2 prompts = 12 cases) — `eval-2xp-2026-08-12T15:25:36`. Overall pass rate: 1/12 (8.3%), down from Day 1's v2 100%. **This is not a regression in v2's prompt quality** — confirmed by inspecting `namedScores` per test: v2 still passes `structure-*`, `heuristic-coverage`, and `filler-phrase-check` on almost every case. The drop is because pass now requires 2 independent local-model judgments (specificity AND concreteness) instead of 1 combined one, and it only takes one of those two to fail for the whole test to fail.
+- [x] **This confirms the finer-resolution goal worked**: e.g. the "Streaming response," "Agent handoff," and legal-research (new) fixtures all show v2 passing `actionability-concreteness` but failing `actionability-specificity` (or vice versa for the handoff case) — a distinction the old single combined rubric couldn't surface.
+- [x] **New reliability finding**: inspecting the raw grading output (`/tmp/day3-eval.json` component results) for several failing cases, `llama3.2`'s stated `reason` text sometimes flatly contradicts its own `pass: false` verdict on these narrow binary sub-rubrics — e.g. reason = "the critique provides explicit, actionable recommendations for fixing issues" or "the critique provides at least 3 fix suggestions that are concrete and implementable as stated" while `pass: false, score: 0`. This shows the local model's binary yes/no grading isn't fully reliable either, not just its numeric/counting ability (Day 1's finding).
+
+## Day 3 (continued) — Fixing the grading-reliability issue
+Rather than ship the rubric split with a known-unreliable grader, investigated and fixed it same-day:
+- [x] **Mitigation 1 — `temperature: 0`** on both providers, verified via `npx promptfoo eval --repeat 2`: 0 inconsistencies across repeats (same input → same verdict every time). This proved the earlier contradictions were *reproducible/systematic*, not random noise — a more serious finding than plain flakiness.
+- [x] **Mitigation 2 — stronger rubric prompt**: added "state evidence for/against, then your pass value must follow from that evidence; do not contradict your own reason" to both `actionability-specificity` and `actionability-concreteness`. This raised v2's pass rate from 1/6 → 4/6 fixtures by fixing several contradictions, but 2/12 cases still showed the model's `reason` text affirming the rubric (sometimes verbatim) while `pass: false`.
+- [x] **Mitigation 3 — bigger grading model**: pulled `llama3.1:8b` (4.9GB, via `ollama pull llama3.1:8b`) and switched *only* `defaultTest.options.provider` to it, keeping generation on `llama3.2` (2GB) for comparability with Day 1/2. Re-ran with `--repeat 2`: 0 inconsistencies, and manual inspection of `reason` vs `pass` showed no remaining contradictions.
+- [x] **Final Day 3 eval** (`eval-cuX-2026-08-12T17:48:25`, single clean run, 6 fixtures × 2 prompts, `--no-cache`): **v1 = 0/6 (0%) pass, v2 = 6/6 (100%) pass.** Per-metric breakdown shows v1 now passes `actionability-specificity`/`actionability-concreteness` in every case (some of its suggestions are genuinely fine) but fails 100% on `structure-*` (it was never told to use the format) — a clean, explainable result, unlike the noisy intermediate runs above.
+- [x] Updated `README.md`: Evaluation Rubric section (5 criteria, `metric` names, dual-model setup + why), Prerequisites (now requires `llama3.2` + `llama3.1:8b`), and Quantified Improvement Evidence (Day 3 update with the clean 0%/100% result and a summary of the reliability investigation).
 
 ## Next Steps
 - [x] Day 2: Run `npm run eval` (v1+v2), compare side-by-side, judge actionability
-- [ ] Day 3: Add real-world agentic UI flow case, re-run eval
-- [ ] Day 4: Stress-test rubric with bad vs. well-designed flows
+- [x] Day 3: Add real-world agentic UI flow case, re-run eval
+- [ ] Day 4: Stress-test rubric with bad vs. well-designed flows. (Day 3's grading-contradiction issue is now resolved — see Day 3 continued section — but keep an eye out for similar reason/pass mismatches if adding a 3rd/4th split criterion.)
 - [ ] Day 5: Iterate prompt (v3), run eval with all 3 versions
 - [ ] Day 6: Export results, finalize metrics in README
 - [ ] Day 7: Final eval, git log review, push to GitHub, email certification request
 
 ## Notes
-- Default Ollama model: llama3.2 (only model pulled locally as of Day 1; update `promptfooconfig.yaml` provider if you switch models)
-- Rubric assertions: `llm-rubric` (pass/fail, graded by local Ollama) for actionability; deterministic `javascript` keyword count for heuristic coverage; `regex` for required output structure (`**Issue**`/`**Severity**`/`**Fix Suggestion**`); `not-icontains` for filler phrases
-- All grading runs fully offline via `defaultTest.options.provider: ollama:chat:llama3.2` — no `OPENAI_API_KEY` needed
+- Ollama models (as of Day 3): `llama3.2` (2GB) for generation, `llama3.1:8b` (4.9GB) for grading — two different local models, on purpose (see Day 3 continued section). Both pulled locally; update `promptfooconfig.yaml` if you switch either.
+- Rubric assertions (Day 3): `llm-rubric` (pass/fail, graded by local Ollama), split into `actionability-specificity` and `actionability-concreteness`; deterministic `javascript` keyword count for `heuristic-coverage`; `regex` for required output structure (`structure-issue-marker`/`structure-severity-marker`/`structure-fix-marker`); `not-icontains` for `filler-phrase-check`. All assertions now have `metric` names for per-criterion visibility in `promptfoo view`.
+- All grading runs fully offline via `defaultTest.options.provider: ollama:chat:llama3.1:8b` — no `OPENAI_API_KEY` needed
 - All iterations tracked via git commits for version history (git repo not yet initialized — see pending item above)

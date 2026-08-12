@@ -27,7 +27,9 @@ This prompt provides a **structured, repeatable critique** that catches these is
 
 ### Prerequisites
 - **Node.js** (v16+)
-- **Ollama** installed locally with a model pulled (default: `llama3.1`)
+- **Ollama** installed locally with two models pulled:
+  - `llama3.2` — used for generation (critiquing the flows)
+  - `llama3.1:8b` — used for grading (`llm-rubric` assertions); pulled on Day 3 after the smaller `llama3.2` proved unreliable as a grader (see Evaluation Rubric section)
 
 ### Installation
 
@@ -78,13 +80,16 @@ This opens a local web interface showing scores, outputs, and side-by-side compa
 
 ## Evaluation Rubric
 
-Each test case is scored on four criteria (`promptfooconfig.yaml` → `defaultTest.assert`):
+Each test case is scored on five criteria (`promptfooconfig.yaml` → `defaultTest.assert`). Every assertion carries a `metric` name so `promptfoo view` shows a distinct, labeled pass/fail (and score) per criterion instead of one lumped number:
 
-1. **Actionability** (pass/fail, `llm-rubric` graded by the local Ollama model): Does the critique provide at least 3 concrete, implementable fix suggestions that reference specific UI states/interactions from the flow (not generic advice)?
+1. **Actionability — Specificity** (pass/fail, `llm-rubric`, metric `actionability-specificity`): Do the critique's fix suggestions reference specific, concrete UI states/interactions from the flow (a specific button, message, timing, or step), rather than describing the problem only in the abstract?
+
+2. **Actionability — Concreteness** (pass/fail, `llm-rubric`, metric `actionability-concreteness`): Does the critique provide at least 3 fix suggestions that are concrete and implementable as stated (not generic advice like "improve the experience")?
    - Example concrete: "Add a progress bar showing 'Step 2/5: Cleaning data' with estimated time remaining"
    - Example generic: "Improve the user experience"
+   - Note (Day 3): this was originally a single combined "actionability" criterion. It was split into these two binary sub-criteria so the rubric can distinguish *why* a critique fails to be actionable (ungrounded in the flow's specifics vs. suggestions being vague) rather than reporting one opaque pass/fail. Kept binary rather than a 1-5 graded score, since Day 1 found the local 2GB `llama3.2` grading model unreliable at numeric/counting judgments.
 
-2. **Coverage of Agentic UX Heuristics** (pass/fail, deterministic keyword count via `javascript` assertion — requires ≥2 of 5 to pass):
+3. **Coverage of Agentic UX Heuristics** (pass/fail, deterministic keyword count via `javascript` assertion, metric `heuristic-coverage` — requires ≥2 of 5 to pass):
    - Progress/status visibility
    - User control and override capability
    - Error recovery guidance
@@ -93,13 +98,20 @@ Each test case is scored on four criteria (`promptfooconfig.yaml` → `defaultTe
 
    Note: this was originally an `llm-rubric` ("count how many topics are mentioned"), but the local grading model (2GB `llama3.2`) proved unreliable at counting/enumeration tasks. It's now a deterministic keyword match against the fixed, closed set of heuristic names the v2 prompt requires, which is both more accurate and doesn't depend on the local model's reasoning.
 
-3. **Structure/Consistency** (binary): Does the output contain the literal `**Issue**`/`## Issues`, `**Severity**`, and `**Fix Suggestion**`/`**Fix**` markdown markers (all three required)?
+4. **Structure/Consistency** (binary, metrics `structure-issue-marker` / `structure-severity-marker` / `structure-fix-marker`): Does the output contain the literal `**Issue**`/`## Issues`, `**Severity**`, and `**Fix Suggestion**`/`**Fix**` markdown markers (all three required)?
    - Checked via 3 separate `regex` assertions. Requiring all three (rather than an OR of loose words like "issue"/"fix") avoids false passes from v1's free-form prose incidentally containing those words.
 
-4. **Conciseness** (binary): No filler phrases
+5. **Conciseness** (binary, metric `filler-phrase-check`): No filler phrases
    - Checked via multiple `not-icontains` assertions for phrases that are unambiguously generic in any context (e.g. "improve the experience"). Single words like "user-friendly" were deliberately excluded from this list since they can appear inside an otherwise concrete, specific suggestion.
 
-**Grading provider**: all model-graded (`llm-rubric`) assertions run against the local Ollama model (`ollama:chat:llama3.2`), set via `defaultTest.options.provider`, so the whole suite runs offline with no `OPENAI_API_KEY` required.
+**Grading provider**: all model-graded (`llm-rubric`) assertions run against a local Ollama model, set via `defaultTest.options.provider`, so the whole suite runs offline with no `OPENAI_API_KEY` required. Generation still uses `ollama:chat:llama3.2` (2GB, unchanged since Day 1, kept for comparability across days), but grading was moved to `ollama:chat:llama3.1:8b` (4.9GB) on Day 3 — see caveat below. Both providers use `temperature: 0` for reproducible results.
+
+**Day 3 grading-reliability investigation**: splitting actionability into two binary sub-rubrics initially surfaced cases where the 2GB `llama3.2` grading model's stated `reason` text contradicted its own `pass` verdict for a single, narrow yes/no question (e.g., reasoning that reads as clearly affirmative while `pass: false`). Three mitigations were tried, in order:
+1. `temperature: 0` — eliminated *flakiness* (verified via `--repeat 2`: identical verdicts every time for the same input), but did not fix the underlying contradictions, which turned out to be reproducible/systematic rather than random.
+2. A stronger rubric prompt requiring the grader to state evidence for/against and forbidding a reason/pass mismatch — measurably reduced (but did not eliminate) contradictions.
+3. Switching the **grading provider only** (not generation) to `llama3.1:8b` — resolved the remaining contradictions in testing (verified via `--repeat 2`, 0 inconsistencies, and manual reading of `reason` text against `pass` values).
+
+This is why generation and grading now use two different local models: the 2GB model is good enough to critique a UI flow, but not reliable enough to grade its own kind of critique against a binary rubric.
 
 ## Quantified Improvement Evidence
 
@@ -116,6 +128,12 @@ Measured via `npm run eval` on 2026-08-10 (Ollama `llama3.2`, 5 real-world agent
 **Improvement**: +100 percentage points in pass rate (0% → 100%) on this rubric and fixture set. Full per-assertion results are in `results/day1-results.json`.
 
 Note: pass/fail here is intentionally strict — it requires meeting every criterion simultaneously (structure AND actionability AND heuristic coverage AND no filler). This is a demonstration rubric across 5 fixtures on a single local model; treat the percentages as directional evidence for this suite, not a universal quality score.
+
+**Day 3 update**: after splitting actionability into two binary sub-criteria, adding a 6th fixture (legal research agent), and fixing the grading-reliability issue described above (moved grading to `llama3.1:8b`, `temperature: 0`), the final Day 3 run (`eval-cuX-2026-08-12T17:48:25`, 6 fixtures × 2 prompts) shows:
+- **v1**: 0/6 pass (0%) — fails only on `structure-*` in every case; `actionability-specificity`/`actionability-concreteness` now pass for v1 too (some of its suggestions genuinely are concrete, just never in the required format).
+- **v2**: 6/6 pass (100%) — passes every criterion, every fixture.
+
+This is a cleaner, more trustworthy result than the intermediate runs during the investigation above (which used the unreliable 2GB grading model and produced a misleadingly low 1/6 pass rate for v2). Verified stable across 2 repeated runs (0 inconsistencies).
 
 ## Version History
 

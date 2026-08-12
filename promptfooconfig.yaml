@@ -6,22 +6,51 @@ providers:
   - id: ollama:chat:llama3.2
     config:
       baseUrl: http://localhost:11434
+      temperature: 0
 
-# Grade model-graded assertions (llm-rubric) with the local Ollama model too,
-# since this suite is designed to run fully offline (no OPENAI_API_KEY available).
+# Grade model-graded assertions (llm-rubric) with a local Ollama model, keeping the whole
+# suite offline (no OPENAI_API_KEY needed). Day 3: generation stays on llama3.2 (2GB) to keep
+# results comparable to Day 1/2, but grading was moved to llama3.1:8b (4.9GB) after the 2GB
+# model showed reproducible reason/pass contradictions on the split actionability sub-rubrics
+# (see progress.txt Day 3 notes) - the 8b model resolved those residual contradictions in testing.
+# temperature: 0 keeps grading deterministic/reproducible across repeated runs.
 defaultTest:
   options:
     provider:
-      id: ollama:chat:llama3.2
+      id: ollama:chat:llama3.1:8b
       config:
         baseUrl: http://localhost:11434
+        temperature: 0
   assert:
+    # Actionability used to be a single llm-rubric conflating two different failure modes
+    # (not grounding suggestions in the flow's specifics vs. suggestions being vague/generic).
+    # Split into two binary sub-criteria (Day 3) so each is graded separately and shows up as
+    # its own named metric in `promptfoo view`, giving finer resolution on *which* failure mode
+    # a prompt version has - kept binary (not a 1-5 score) since Day 1 found the local 2GB
+    # llama3.2 model unreliable at numeric/counting judgments.
     - type: llm-rubric
+      metric: actionability-specificity
       value: |
-        The critique provides at least 3 concrete, implementable fix suggestions that reference
-        specific UI states or interactions from the flow description (e.g., a specific button,
-        message, timing, or step). Generic advice such as "improve the experience," "add better
-        feedback," or "make it more user-friendly" does NOT count as concrete.
+        The critique's fix suggestions reference specific, concrete UI states or interactions
+        from the flow description (e.g., a specific button, message, timing, or step), rather
+        than describing the problem only in the abstract.
+        Before answering, state the strongest evidence FOR and AGAINST this claim being true.
+        Your final "pass" value must directly follow from that evidence: if the evidence for
+        outweighs the evidence against, pass must be true; otherwise pass must be false. Do not
+        contradict your own "reason" field with your "pass" field.
+    - type: llm-rubric
+      metric: actionability-concreteness
+      value: |
+        The critique provides at least 3 fix suggestions that are concrete and implementable as
+        stated (a developer/designer could act on them directly). Generic advice such as
+        "improve the experience," "add better feedback," or "make it more user-friendly" does
+        NOT count as concrete.
+        Before answering, state the strongest evidence FOR and AGAINST this claim being true.
+        Your final "pass" value must directly follow from that evidence: if the evidence for
+        outweighs the evidence against, pass must be true; otherwise pass must be false. Do not
+        contradict your own "reason" field with your "pass" field.
+    # ^ Both of the above are graded by llama3.1:8b (see defaultTest.options.provider), not the
+    # 2GB llama3.2 used for generation - see the comment on defaultTest above for why.
     # Heuristic coverage: this used to be an llm-rubric ("count how many of these 5 topics are
     # mentioned"), but the local 2GB grading model (llama3.2) proved unreliable at counting/
     # enumeration - it under-counted a critique that explicitly labeled 3 distinct heuristics as
@@ -29,6 +58,7 @@ defaultTest:
     # fixed, closed set of 5 heuristic names, a deterministic keyword count is both more accurate
     # and doesn't depend on the local model's reasoning ability.
     - type: javascript
+      metric: heuristic-coverage
       value: |
         const categories = [
           /progress|status visib/i,
@@ -48,27 +78,35 @@ defaultTest:
     # Note: plain JS RegExp does not support inline flags like (?i), so case is matched exactly
     # against the fixed capitalization used in the v2 prompt template.
     - type: regex
+      metric: structure-issue-marker
       value: "\\*\\*Issue\\*\\*|## Issues"
     - type: regex
+      metric: structure-severity-marker
       value: "\\*\\*Severity\\*\\*"
     - type: regex
+      metric: structure-fix-marker
       value: "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
     # Broader generic-filler check, split into separate case-insensitive "not-icontains" checks.
     # Deliberately limited to phrases that are ALWAYS filler regardless of context (e.g. "improve
     # the experience" is never a concrete fix). Single words like "user-friendly" or "better UI"
     # were dropped from this list because they can appear inside an otherwise concrete, specific
     # suggestion (e.g. "add a user-friendly progress bar showing step X/5") and produced false
-    # negatives. Genuine vagueness is instead caught by the actionability llm-rubric above, which
-    # judges the full sentence/context rather than banning individual words.
+    # negatives. Genuine vagueness is instead caught by the actionability-concreteness llm-rubric
+    # above, which judges the full sentence/context rather than banning individual words.
     - type: not-icontains
+      metric: filler-phrase-check
       value: "improve the experience"
     - type: not-icontains
+      metric: filler-phrase-check
       value: "improve the user experience"
     - type: not-icontains
+      metric: filler-phrase-check
       value: "enhance the experience"
     - type: not-icontains
+      metric: filler-phrase-check
       value: "enhance the user experience"
     - type: not-icontains
+      metric: filler-phrase-check
       value: "add better feedback"
 
 tests: file://testcases/fixtures.yaml
