@@ -135,6 +135,12 @@ Note: pass/fail here is intentionally strict — it requires meeting every crite
 
 This is a cleaner, more trustworthy result than the intermediate runs during the investigation above (which used the unreliable 2GB grading model and produced a misleadingly low 1/6 pass rate for v2). Verified stable across 2 repeated runs (0 inconsistencies).
 
+**Day 4 update — stress-test with a bad flow and a well-designed flow**: added fixtures 7 ("Compounding failures") and 8 ("Well-designed export flow") specifically to check whether the rubric behaves sensibly at the extremes. `npm run eval --no-cache` (`eval-CIY-2026-08-13T13:26:24`, 8 fixtures × 2 prompts): v1 = 0/8 (0%), v2 = 8/8 (100%) — same pattern as Day 3.
+
+The compounding-failures fixture worked as intended (v2 correctly flagged the irreversible-submission issue as top severity among several). **The well-designed fixture did not** — v2 still passed all 6 criteria by fabricating 5 issues on a flow that has no real problems (e.g., flagging "inadequate confirmation before destructive actions" on a flow that explicitly has a confirmation dialog). v1 was comparatively more honest (it opened with a "Strengths" section) but still manufactured some generic critique.
+
+**This is a known, currently-unresolved gap, not a hidden one**: neither prompt has permission to report "no significant issues found," and the rubric's requirement for ≥3 concrete fixes structurally rewards inventing problems on a clean design with a full pass. v2's 100% pass rate above should be read as "v2 always produces a well-structured, heuristic-labeled, non-generic critique" — not as "v2 always correctly identifies real problems." Fixing this (giving the prompt permission to report no issues, and adjusting the rubric so that legitimate "no issues" critique isn't penalized) is queued for Day 5's prompt iteration. See `progress.txt` Day 4 notes for the full critique text and reasoning.
+
 ## Version History
 
 - **v1** (baseline): Naive, under-specified prompt with no output structure or persona. Serves as the "before" state.
@@ -144,13 +150,16 @@ See `git log --oneline` for iteration history.
 
 ## Test Cases
 
-The suite includes 5 realistic agentic UI flow scenarios:
+The suite includes 8 agentic UI flow scenarios:
 
 1. **Multi-step processing with no progress indicator** — User uploads CSV, agent processes across 5 steps with only "Processing..." message; no cancel, no error recovery.
 2. **Destructive action without confirmation** — Chat agent auto-approves all expenses without summary or confirmation dialog.
 3. **Streaming response with no interrupt** — Agent streams long response; user cannot cancel mid-stream if agent goes off-track.
 4. **Silent handoff failure** — Agent handoff to human specialist fails silently; no error message, retry, or fallback contact info.
 5. **Opaque agent reasoning** — Agent recommends a product with no explanation of reasoning, data sources, or confidence; user cannot override.
+6. **Hidden confidence and provenance gap** *(Day 3)* — Legal research agent's contract risk analysis has no inline citations, confidence scores, or source attribution.
+7. **Compounding failures** *(Day 4)* — Financial reconciliation agent stacks multiple violations at once: irreversible auto-submission with no confirmation, no progress, no cancel, and a blank error screen on partial failure.
+8. **Well-designed export flow** *(Day 4)* — Deliberately has *no* real UX issues (progress bar, cancel button, confirmation dialog, detailed error+retry, explained/overridable defaults); added to stress-test whether the rubric can distinguish a genuinely good flow from a bad one. See the Day 4 finding below — it currently can't.
 
 ## Daily Testing Cadence (Week 1)
 

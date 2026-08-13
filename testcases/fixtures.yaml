@@ -21,3 +21,11 @@
 - vars:
     flowDescription: |
       Hidden confidence and provenance gap: User asks a legal research agent to draft a contract risk analysis. The agent returns a finalized bulleted summary with no inline citations, no confidence scores, and no indication of which clauses were extracted directly from the source documents versus inferred by the model. The user has no way to verify individual claims or flag low-confidence assertions before relying on the analysis for a legal decision.
+
+- vars:
+    flowDescription: |
+      Compounding failures agent: User asks an agent to reconcile and submit a batch of financial transactions. The agent immediately begins irreversibly submitting transactions without any confirmation or summary. During the multi-minute process there's no progress indicator and no way to cancel or pause. When several submissions fail partway through, the UI simply goes blank with no error message, no indication of which transactions succeeded versus failed, and no retry option.
+
+- vars:
+    flowDescription: |
+      Well-designed export flow: User requests a report export. The agent shows a live progress bar with the current step name and percentage (e.g., "Step 2/4: Formatting data - 45%"), a visible Cancel button that immediately halts the export, and a confirmation dialog before overwriting any existing file. If an error occurs, the UI shows the specific failure reason with a Retry button and a support link. The agent also briefly explains why it chose the default export format and lets the user override it.
