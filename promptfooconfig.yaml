@@ -1,6 +1,7 @@
 prompts:
   - file:///Users/mario.miqueles/Documents/improving-certification-stage-3/prompts/v1-flow-critique.txt
   - file:///Users/mario.miqueles/Documents/improving-certification-stage-3/prompts/v2-flow-critique.txt
+  - file:///Users/mario.miqueles/Documents/improving-certification-stage-3/prompts/v3-flow-critique.txt
 
 providers:
   - id: ollama:chat:llama3.2
@@ -28,12 +29,19 @@ defaultTest:
     # its own named metric in `promptfoo view`, giving finer resolution on *which* failure mode
     # a prompt version has - kept binary (not a 1-5 score) since Day 1 found the local 2GB
     # llama3.2 model unreliable at numeric/counting judgments.
+    # Day 5: both actionability sub-rubrics now also pass when the critique correctly reports
+    # "No significant issues found" - added after v3's prompt change gave the model permission
+    # to report no issues, so a legitimately clean flow isn't penalized for having nothing to
+    # fix. This only applies to the literal, correct no-issues response, not to a critique that
+    # dodges finding real problems.
     - type: llm-rubric
       metric: actionability-specificity
       value: |
-        The critique's fix suggestions reference specific, concrete UI states or interactions
-        from the flow description (e.g., a specific button, message, timing, or step), rather
-        than describing the problem only in the abstract.
+        Either (a) the critique's fix suggestions reference specific, concrete UI states or
+        interactions from the flow description (e.g., a specific button, message, timing, or
+        step), rather than describing the problem only in the abstract, OR (b) the critique
+        states "No significant issues found" and this is a correct, non-fabricated determination
+        given the flow description (the flow genuinely has no missing capability worth flagging).
         Before answering, state the strongest evidence FOR and AGAINST this claim being true.
         Your final "pass" value must directly follow from that evidence: if the evidence for
         outweighs the evidence against, pass must be true; otherwise pass must be false. Do not
@@ -41,10 +49,12 @@ defaultTest:
     - type: llm-rubric
       metric: actionability-concreteness
       value: |
-        The critique provides at least 3 fix suggestions that are concrete and implementable as
-        stated (a developer/designer could act on them directly). Generic advice such as
-        "improve the experience," "add better feedback," or "make it more user-friendly" does
-        NOT count as concrete.
+        Either (a) the critique provides at least 3 fix suggestions that are concrete and
+        implementable as stated (a developer/designer could act on them directly) - generic
+        advice such as "improve the experience," "add better feedback," or "make it more
+        user-friendly" does NOT count as concrete - OR (b) the critique states "No significant
+        issues found" and this is a correct, non-fabricated determination given the flow
+        description (the flow genuinely has no missing capability worth flagging).
         Before answering, state the strongest evidence FOR and AGAINST this claim being true.
         Your final "pass" value must directly follow from that evidence: if the evidence for
         outweighs the evidence against, pass must be true; otherwise pass must be false. Do not
@@ -57,9 +67,16 @@ defaultTest:
     # "only 1 topic mentioned". Since the v2 template requires labeling each issue with one of a
     # fixed, closed set of 5 heuristic names, a deterministic keyword count is both more accurate
     # and doesn't depend on the local model's reasoning ability.
+    # Day 5: added a "no significant issues found" escape hatch to the pass condition (see the
+    # NO_ISSUES_RE check) so a correct, legitimate "nothing to report" critique (v3's new
+    # behavior) isn't penalized for not mentioning any heuristics by name.
     - type: javascript
       metric: heuristic-coverage
       value: |
+        const NO_ISSUES_RE = /no significant issues found/i;
+        if (NO_ISSUES_RE.test(output)) {
+          return { pass: true, score: 1, reason: "correctly reported no significant issues" };
+        }
         const categories = [
           /progress|status visib/i,
           /user control|override|interrupt/i,
@@ -80,12 +97,23 @@ defaultTest:
     - type: regex
       metric: structure-issue-marker
       value: "\\*\\*Issue\\*\\*|## Issues"
-    - type: regex
+    # Day 5: structure-severity-marker and structure-fix-marker converted from plain `regex` to
+    # `javascript` so they can also accept the literal "No significant issues found" response
+    # (v3's new behavior for well-designed flows) as a valid alternate outcome, instead of always
+    # requiring Severity/Fix Suggestion markers that a correct "nothing to report" critique won't
+    # have.
+    - type: javascript
       metric: structure-severity-marker
-      value: "\\*\\*Severity\\*\\*"
-    - type: regex
+      value: |
+        const NO_ISSUES_RE = /no significant issues found/i;
+        const pass = /\*\*Severity\*\*/.test(output) || NO_ISSUES_RE.test(output);
+        return { pass, score: pass ? 1 : 0, reason: pass ? "Assertion passed" : "Missing **Severity** marker (and no valid no-issues statement)" };
+    - type: javascript
       metric: structure-fix-marker
-      value: "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+      value: |
+        const NO_ISSUES_RE = /no significant issues found/i;
+        const pass = /\*\*Fix Suggestion\*\*|\*\*Fix\*\*/.test(output) || NO_ISSUES_RE.test(output);
+        return { pass, score: pass ? 1 : 0, reason: pass ? "Assertion passed" : "Missing **Fix Suggestion** marker (and no valid no-issues statement)" };
     # Broader generic-filler check, split into separate case-insensitive "not-icontains" checks.
     # Deliberately limited to phrases that are ALWAYS filler regardless of context (e.g. "improve
     # the experience" is never a concrete fix). Single words like "user-friendly" or "better UI"

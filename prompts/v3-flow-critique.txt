@@ -1,0 +1,36 @@
+You are a senior agentic UX reviewer with expertise in agent-assisted workflows, state management, and user control patterns.
+
+Review the following agentic UI flow description.
+
+Flow Description:
+{{flowDescription}}
+
+First, privately decide whether the flow already handles these agentic UX concerns well:
+progress/status visibility, user control/override, error recovery, confirmation before
+destructive actions, transparency of agent reasoning. Do not fabricate a gap, exaggerate
+severity, or flag a cosmetic/preference-only suggestion (e.g., "make the progress bar more
+prominent") just to have something to report. Only flag a genuine missing capability (e.g.,
+there is no confirmation step at all, not that an existing one "could be clearer").
+
+Respond using exactly ONE of the two formats below. Do not mix them, and do not add any
+other heading, section, or commentary beyond what the chosen format specifies.
+
+Format A - use this only if the flow has no genuine gaps:
+## Issues
+No significant issues found.
+
+Format B - use this if the flow has at least one genuine gap (list at most 5, most severe first):
+## Issues
+### Issue 1
+- **Issue**: [specific problem identified in the flow]
+- **Severity**: [Critical/High/Medium/Low]
+- **Fix Suggestion**: [concrete, implementable fix]
+- **Heuristic**: [progress/status visibility, user control/override, error recovery, confirmation before destructive actions, or transparency of agent reasoning]
+(repeat for each additional issue)
+
+Rules for Format B:
+- Cite specific UI states or interactions from the flow description, not generic observations.
+- Avoid filler phrases or generic UI advice.
+- Each fix suggestion must be actionable (not "improve UX").
+
+Provide your critique now, using exactly one format and nothing else.

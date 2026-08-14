@@ -141,10 +141,17 @@ The compounding-failures fixture worked as intended (v2 correctly flagged the ir
 
 **This is a known, currently-unresolved gap, not a hidden one**: neither prompt has permission to report "no significant issues found," and the rubric's requirement for ≥3 concrete fixes structurally rewards inventing problems on a clean design with a full pass. v2's 100% pass rate above should be read as "v2 always produces a well-structured, heuristic-labeled, non-generic critique" — not as "v2 always correctly identifies real problems." Fixing this (giving the prompt permission to report no issues, and adjusting the rubric so that legitimate "no issues" critique isn't penalized) is queued for Day 5's prompt iteration. See `progress.txt` Day 4 notes for the full critique text and reasoning.
 
+**Day 5 update — v3 attempted to fix the fabrication gap, and did not succeed**: `prompts/v3-flow-critique.txt` adds explicit permission to respond "No significant issues found" plus a "do not fabricate/nitpick cosmetics" rule, and `promptfooconfig.yaml`'s rubric was updated (OR-clauses on `structure-severity-marker`/`structure-fix-marker`/`heuristic-coverage`, updated `actionability-*` wording) so a correct no-issues response wouldn't be automatically penalized. `npm run eval --no-cache` (`eval-iuL-2026-08-14T14:30:26`, 8 fixtures × 3 prompts) result: **v1 = 0/8, v2 = 8/8, v3 = 4/8** — v3 scored worse than v2.
+
+v3 still fabricated 5 issues on the well-designed flow (same defect as v2), and introduced two new artifacts: a contradictory trailing "No significant issues found." line appended *after* a correct 5-issue critique on the compounding-failures fixture, and a spurious echoed `## Constraints` section in several outputs that confused the grader. A simplified single-template rewrite was tried as a second attempt (`eval-ELw-2026-08-14T15:46:18`, v3 only) but regressed further — 0/8 pass, and the model now stops after finding just 1 issue on flows with multiple genuine problems.
+
+**Conclusion**: `prompts/v3-flow-critique.txt` in this repo is attempt 1 (the better of the two, kept as an honest documented result) — not a working fix. **v2 remains the best-performing, recommended prompt.** The fabrication gap appears to need more than prompt wording changes on this 2GB generation model to resolve; candidates for a future attempt include a bigger local generation model (mirroring the Day 3 grading-model fix) or a concrete few-shot example of a correct "no issues" response. See `progress.txt` Day 5 notes for full critique text and root-cause analysis.
+
 ## Version History
 
 - **v1** (baseline): Naive, under-specified prompt with no output structure or persona. Serves as the "before" state.
-- **v2** (improved): Structured prompt with defined persona (senior agentic-UX reviewer), explicit output format (Issues / Severity / Fix), constraints (max 5 issues, cite specific states, no fluff), and grounding in agentic UX heuristics.
+- **v2** (improved): Structured prompt with defined persona (senior agentic-UX reviewer), explicit output format (Issues / Severity / Fix), constraints (max 5 issues, cite specific states, no fluff), and grounding in agentic UX heuristics. **Currently the best-performing, recommended prompt.**
+- **v3** (Day 5 experiment, not an improvement): Attempted to add permission to report "No significant issues found" on well-designed flows, to fix the fabrication gap found on Day 4. Did not work on this 2GB generation model — still fabricated issues on the well-designed flow, and introduced new formatting/completeness regressions. Kept in the repo as a documented negative result; see the Day 5 update above and `progress.txt` for full details.
 
 See `git log --oneline` for iteration history.
 
