@@ -1,0 +1,2727 @@
+{
+  "evalId": "eval-Xur-2026-08-10T20:24:52",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-08-10T20:24:52.296Z",
+    "prompts": [
+      {
+        "raw": "You are a UI reviewer. Look at the following agentic UI flow description and provide critique.\n\nFlow Description:\n{{flowDescription}}\n\nPlease provide your critique.",
+        "label": "prompts/v1-flow-critique.txt: You are a UI reviewer. Look at the following agentic UI flow description and provide critique.\n\nFlow Description:\n{{flowDescription}}\n\nPlease provide your critique.",
+        "id": "97d29e46b11b1aee7dfcef0c106ab9f4ddefa083f7a46fe6a9ebe2fb403de2bb",
+        "provider": "ollama:chat:llama3.2",
+        "metrics": {
+          "score": 2.9800000000000004,
+          "testPassCount": 0,
+          "testFailCount": 5,
+          "testErrorCount": 0,
+          "assertPassCount": 32,
+          "assertFailCount": 18,
+          "totalLatencyMs": 44,
+          "tokenUsage": {
+            "prompt": 609,
+            "completion": 2026,
+            "cached": 0,
+            "total": 2635,
+            "numRequests": 5,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 3527,
+              "prompt": 3345,
+              "completion": 182,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      },
+      {
+        "raw": "You are a senior agentic UX reviewer with expertise in agent-assisted workflows, state management, and user control patterns.\n\nReview the following agentic UI flow description and provide a structured critique.\n\nFlow Description:\n{{flowDescription}}\n\nYour critique must follow this exact structure:\n\n## Issues\nList each issue found (max 5). For each issue:\n- **Issue**: [specific problem identified in the flow]\n- **Severity**: [Critical/High/Medium/Low]\n- **Fix Suggestion**: [concrete, implementable fix]\n- **Heuristic**: [which agentic UX heuristic it violates: progress/status visibility, user control/override, error recovery, confirmation before destructive actions, or transparency of agent reasoning]\n\n## Constraints\n- Cite specific UI states or interactions from the flow description, not generic observations\n- Focus on agentic-specific concerns: loading/streaming states, error/interrupt handling, confirmation patterns, user control, agent reasoning transparency\n- Avoid filler phrases or generic UI advice\n- Each fix suggestion must be actionable (not \"improve UX\")\n\nProvide your critique now.",
+        "label": "prompts/v2-flow-critique.txt: You are a senior agentic UX reviewer with expertise in agent-assisted workflows, state management, and user control patterns.\n\nReview the following agentic UI flow description and provide a structured critique.\n\nFlow Description:\n{{flowDescription}}\n\nYour critique must follow this exact structure:\n\n## Issues\nList each issue found (max 5). For each issue:\n- **Issue**: [specific problem identified in the flow]\n- **Severity**: [Critical/High/Medium/Low]\n- **Fix Suggestion**: [concrete, implementable fix]\n- **Heuristic**: [which agentic UX heuristic it violates: progress/status visibility, user control/override, error recovery, confirmation before destructive actions, or transparency of agent reasoning]\n\n## Constraints\n- Cite specific UI states or interactions from the flow description, not generic observations\n- Focus on agentic-specific concerns: loading/streaming states, error/interrupt handling, confirmation patterns, user control, agent reasoning transparency\n- Avoid filler phrases or generic UI advice\n- Each fix suggestion must be actionable (not \"improve UX\")\n\nProvide your critique now.",
+        "id": "6f5aa1a795703b968bca2e1ed12c61c98d52806d5b045086c2b1b3d5801c4e41",
+        "provider": "ollama:chat:llama3.2",
+        "metrics": {
+          "score": 4.9399999999999995,
+          "testPassCount": 5,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 50,
+          "assertFailCount": 0,
+          "totalLatencyMs": 41,
+          "tokenUsage": {
+            "prompt": 1559,
+            "completion": 2647,
+            "cached": 0,
+            "total": 4206,
+            "numRequests": 5,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 5345,
+              "prompt": 3970,
+              "completion": 1375,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "error": "Expected output to not contain \"enhance the user experience\"",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.42000000000000004,
+          "reason": "Expected output to not contain \"enhance the user experience\"",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 707,
+            "prompt": 675,
+            "completion": 32,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "the critique provides at least 3 concrete, implementable fix suggestions",
+              "tokensUsed": {
+                "total": 707,
+                "prompt": 675,
+                "completion": 32,
+                "cached": 0,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n**Critique:**\\n\\nThe provided agentic UI flow description highlights several concerns that need attention to improve the user experience. Here's a detailed breakdown of the issues and suggested improvements:\\n\\n1. **Lack of Progress Indication**: The generic \\\"Processing...\\\" message doesn't update, making it difficult for users to track the progress of each step. This can lead to frustration and uncertainty about when the process will complete.\\n\\n**Suggested Improvement:** Provide a clear and concise progress bar or indicator that updates in real-time as each step completes. This will help users visualize their progress and anticipate when the next step will start.\\n\\n2. **No Feedback on Step Completion**: Without any indication of which step is currently running, users may wonder what's happening after 2 minutes if they don't see a \\\"Processing...\\\" message update.\\n\\n**Suggested Improvement:** Add a brief description or label to each step (e.g., \\\"Validation\\\", \\\"Data Cleaning\\\") that appears in the UI as each step completes. This provides users with context and reassurance that the process is ongoing.\\n\\n3. **No Cancel Button**: In cases where an error occurs mid-process, users should be able to cancel the operation and retrieve their original data.\\n\\n**Suggested Improvement:** Provide a \\\"Cancel\\\" or \\\"Abort\\\" button after 2 minutes of inactivity (to prevent the user from being stuck indefinitely) that allows them to stop the process and save any changes made so far. Alternatively, display an error message with a clear indication of how to recover from the issue.\\n\\n4. **Insufficient Error Handling**: When an error occurs mid-process, users are only shown a generic \\\"Error occurred\\\" message without guidance on recovery.\\n\\n**Suggested Improvement:** Provide more detailed information about the error, including:\\n\\n* A brief explanation of what went wrong\\n* Suggestions for resolving the issue (e.g., retrying, checking data formatting)\\n* Clear instructions on how to proceed\\n\\nBy addressing these concerns, you can enhance the user experience and reduce frustration in the multi-step data processing agent.\\n</Output>\\n<Rubric>\\nThe critique provides at least 3 concrete, implementable fix suggestions that reference\\nspecific UI states or interactions from the flow description (e.g., a specific button,\\nmessage, timing, or step). Generic advice such as \\\"improve the experience,\\\" \\\"add better\\nfeedback,\\\" or \\\"make it more user-friendly\\\" does NOT count as concrete.\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0.2,
+              "reason": "1/5 agentic UX heuristics mentioned",
+              "assertion": {
+                "type": "javascript",
+                "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Issue\\*\\*|## Issues\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Issue\\*\\*|## Issues"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Severity\\*\\*\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Severity\\*\\*"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the experience"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to not contain \"improve the user experience\"",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the experience"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to not contain \"enhance the user experience\"",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "add better feedback"
+              }
+            }
+          ]
+        },
+        "id": "01c0de74-8dfd-4cdb-88d1-d23fffdf84f6",
+        "latencyMs": 15,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a UI reviewer. Look at the following agentic UI flow description and provide critique.\n\nFlow Description:\nMulti-step data processing agent: User uploads a CSV file. The agent begins parsing and processing the data across 5 sequential steps (validation, cleaning, transformation, analysis, export). The UI shows a generic \"Processing...\" message that doesn't update. After 2 minutes, the user has no idea which step is running or how much longer to wait. There's no cancel button. If an error occurs mid-process, the user sees only \"Error occurred\" with no guidance on recovery.\n\nPlease provide your critique.",
+          "label": "prompts/v1-flow-critique.txt: You are a UI reviewer. Look at the following agentic UI flow description and provide critique.\n\nFlow Description:\n{{flowDescription}}\n\nPlease provide your critique.",
+          "config": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          }
+        },
+        "promptId": "97d29e46b11b1aee7dfcef0c106ab9f4ddefa083f7a46fe6a9ebe2fb403de2bb",
+        "promptIdx": 0,
+        "provider": {
+          "id": "ollama:chat:llama3.2",
+          "label": ""
+        },
+        "response": {
+          "output": "**Critique:**\n\nThe provided agentic UI flow description highlights several concerns that need attention to improve the user experience. Here's a detailed breakdown of the issues and suggested improvements:\n\n1. **Lack of Progress Indication**: The generic \"Processing...\" message doesn't update, making it difficult for users to track the progress of each step. This can lead to frustration and uncertainty about when the process will complete.\n\n**Suggested Improvement:** Provide a clear and concise progress bar or indicator that updates in real-time as each step completes. This will help users visualize their progress and anticipate when the next step will start.\n\n2. **No Feedback on Step Completion**: Without any indication of which step is currently running, users may wonder what's happening after 2 minutes if they don't see a \"Processing...\" message update.\n\n**Suggested Improvement:** Add a brief description or label to each step (e.g., \"Validation\", \"Data Cleaning\") that appears in the UI as each step completes. This provides users with context and reassurance that the process is ongoing.\n\n3. **No Cancel Button**: In cases where an error occurs mid-process, users should be able to cancel the operation and retrieve their original data.\n\n**Suggested Improvement:** Provide a \"Cancel\" or \"Abort\" button after 2 minutes of inactivity (to prevent the user from being stuck indefinitely) that allows them to stop the process and save any changes made so far. Alternatively, display an error message with a clear indication of how to recover from the issue.\n\n4. **Insufficient Error Handling**: When an error occurs mid-process, users are only shown a generic \"Error occurred\" message without guidance on recovery.\n\n**Suggested Improvement:** Provide more detailed information about the error, including:\n\n* A brief explanation of what went wrong\n* Suggestions for resolving the issue (e.g., retrying, checking data formatting)\n* Clear instructions on how to proceed\n\nBy addressing these concerns, you can enhance the user experience and reduce frustration in the multi-step data processing agent.",
+          "tokenUsage": {
+            "prompt": 150,
+            "completion": 411,
+            "total": 561
+          }
+        },
+        "score": 0.42000000000000004,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "flowDescription": "Multi-step data processing agent: User uploads a CSV file. The agent begins parsing and processing the data across 5 sequential steps (validation, cleaning, transformation, analysis, export). The UI shows a generic \"Processing...\" message that doesn't update. After 2 minutes, the user has no idea which step is running or how much longer to wait. There's no cancel button. If an error occurs mid-process, the user sees only \"Error occurred\" with no guidance on recovery.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Issue\\*\\*|## Issues"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Severity\\*\\*"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "add better feedback"
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "tokenUsage": {
+          "prompt": 150,
+          "completion": 411,
+          "cached": 0,
+          "total": 561,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 707,
+            "prompt": 675,
+            "completion": 32,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "flowDescription": "Multi-step data processing agent: User uploads a CSV file. The agent begins parsing and processing the data across 5 sequential steps (validation, cleaning, transformation, analysis, export). The UI shows a generic \"Processing...\" message that doesn't update. After 2 minutes, the user has no idea which step is running or how much longer to wait. There's no cancel button. If an error occurs mid-process, the user sees only \"Error occurred\" with no guidance on recovery.\n"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 1655,
+            "prompt": 922,
+            "completion": 733,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "all issues are identified with specific and actionable fix suggestions",
+              "tokensUsed": {
+                "total": 1655,
+                "prompt": 922,
+                "completion": 733,
+                "cached": 0,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n## Issues\\n\\n### Issue 1: Lack of progress visibility and step indication\\n**Severity**: Medium\\n**Fix Suggestion**: Display the current step number out of the total steps (5 in this case) next to the \\\"Processing...\\\" message, or show a progress bar that indicates how much of the process is complete.\\n**Heuristic**: Progress/status visibility\\n\\n### Issue 2: Insufficient user control and feedback during processing\\n**Severity**: High\\n**Fix Suggestion**: Add a cancel button after 1 minute of inactivity, allowing the user to interrupt the process early. Alternatively, display a \\\"Processing complete\\\" message with an option to continue with the next step or restart from scratch.\\n**Heuristic**: User control/override\\n\\n### Issue 3: Inadequate error handling and recovery guidance\\n**Severity**: Critical\\n**Fix Suggestion**: When an error occurs, show the specific error message and provide a clear indication of how to recover from it (e.g., \\\"Re-run analysis\\\" or \\\"Correct data issue\\\"). Use a more descriptive \\\"Error occurred\\\" state instead of the generic phrase.\\n**Heuristic**: Error recovery\\n\\n### Issue 4: Missing confirmation for destructive actions\\n**Severity**: Low\\n**Fix Suggestion**: Add a confirmation dialog before proceeding with any step that might overwrite existing data or result in permanent changes (e.g., exporting results).\\n**Heuristic**: Confirmation before destructive actions\\n\\n### Issue 5: Transparency of agent reasoning and state management\\n**Severity**: Medium\\n**Fix Suggestion**: Implement a \\\"View details\\\" button next to the \\\"Processing...\\\" message, allowing users to see the specific task being performed (e.g., \\\"Validation step with 500 data points\\\") or access agent logs to diagnose issues.\\n**Heuristic**: Transparency of agent reasoning\\n\\n### Issue 6: Missing indication of loading/streaming state\\n**Severity**: Medium\\n**Fix Suggestion**: Display a loading icon or text next to the CSV file upload button to indicate that data is being processed, and consider using an indeterminate progress bar for longer-running tasks.\\n**Heuristic**: Loading/streaming states\\n\\n### Issue 7: No indication of completion time estimate\\n**Severity**: Low\\n**Fix Suggestion**: Provide a rough estimate of how long the processing will take based on historical data or a sample of similar files. This can help users plan their workflow and avoid unnecessary waiting.\\n**Heuristic**: None (this is not an agentic-specific concern, but rather a general UX principle)\\n\\n### Issue 8: No indication of step restart or continuation\\n**Severity**: Medium\\n**Fix Suggestion**: Add options to restart from the beginning or continue with the current step after processing completes. This can be achieved through a menu or button next to the \\\"Processing complete\\\" message.\\n**Heuristic**: None (this is not an agentic-specific concern, but rather a general UX principle)\\n\\n### Issue 9: No indication of agent decision-making and state transitions\\n**Severity**: Medium\\n**Fix Suggestion**: Implement a \\\"View agent decisions\\\" or \\\"Agent logs\\\" button to allow users to see the reasoning behind the agent's actions and understand how it transitioned between states.\\n**Heuristic**: Transparency of agent reasoning\\n</Output>\\n<Rubric>\\nThe critique provides at least 3 concrete, implementable fix suggestions that reference\\nspecific UI states or interactions from the flow description (e.g., a specific button,\\nmessage, timing, or step). Generic advice such as \\\"improve the experience,\\\" \\\"add better\\nfeedback,\\\" or \\\"make it more user-friendly\\\" does NOT count as concrete.\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "5/5 agentic UX heuristics mentioned",
+              "assertion": {
+                "type": "javascript",
+                "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Issue\\*\\*|## Issues"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Severity\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "add better feedback"
+              }
+            }
+          ]
+        },
+        "id": "47d9859d-8030-4ecc-92df-3b1b49bd4d74",
+        "latencyMs": 14,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a senior agentic UX reviewer with expertise in agent-assisted workflows, state management, and user control patterns.\n\nReview the following agentic UI flow description and provide a structured critique.\n\nFlow Description:\nMulti-step data processing agent: User uploads a CSV file. The agent begins parsing and processing the data across 5 sequential steps (validation, cleaning, transformation, analysis, export). The UI shows a generic \"Processing...\" message that doesn't update. After 2 minutes, the user has no idea which step is running or how much longer to wait. There's no cancel button. If an error occurs mid-process, the user sees only \"Error occurred\" with no guidance on recovery.\n\nYour critique must follow this exact structure:\n\n## Issues\nList each issue found (max 5). For each issue:\n- **Issue**: [specific problem identified in the flow]\n- **Severity**: [Critical/High/Medium/Low]\n- **Fix Suggestion**: [concrete, implementable fix]\n- **Heuristic**: [which agentic UX heuristic it violates: progress/status visibility, user control/override, error recovery, confirmation before destructive actions, or transparency of agent reasoning]\n\n## Constraints\n- Cite specific UI states or interactions from the flow description, not generic observations\n- Focus on agentic-specific concerns: loading/streaming states, error/interrupt handling, confirmation patterns, user control, agent reasoning transparency\n- Avoid filler phrases or generic UI advice\n- Each fix suggestion must be actionable (not \"improve UX\")\n\nProvide your critique now.",
+          "label": "prompts/v2-flow-critique.txt: You are a senior agentic UX reviewer with expertise in agent-assisted workflows, state management, and user control patterns.\n\nReview the following agentic UI flow description and provide a structured critique.\n\nFlow Description:\n{{flowDescription}}\n\nYour critique must follow this exact structure:\n\n## Issues\nList each issue found (max 5). For each issue:\n- **Issue**: [specific problem identified in the flow]\n- **Severity**: [Critical/High/Medium/Low]\n- **Fix Suggestion**: [concrete, implementable fix]\n- **Heuristic**: [which agentic UX heuristic it violates: progress/status visibility, user control/override, error recovery, confirmation before destructive actions, or transparency of agent reasoning]\n\n## Constraints\n- Cite specific UI states or interactions from the flow description, not generic observations\n- Focus on agentic-specific concerns: loading/streaming states, error/interrupt handling, confirmation patterns, user control, agent reasoning transparency\n- Avoid filler phrases or generic UI advice\n- Each fix suggestion must be actionable (not \"improve UX\")\n\nProvide your critique now.",
+          "config": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          }
+        },
+        "promptId": "6f5aa1a795703b968bca2e1ed12c61c98d52806d5b045086c2b1b3d5801c4e41",
+        "promptIdx": 1,
+        "provider": {
+          "id": "ollama:chat:llama3.2",
+          "label": ""
+        },
+        "response": {
+          "output": "## Issues\n\n### Issue 1: Lack of progress visibility and step indication\n**Severity**: Medium\n**Fix Suggestion**: Display the current step number out of the total steps (5 in this case) next to the \"Processing...\" message, or show a progress bar that indicates how much of the process is complete.\n**Heuristic**: Progress/status visibility\n\n### Issue 2: Insufficient user control and feedback during processing\n**Severity**: High\n**Fix Suggestion**: Add a cancel button after 1 minute of inactivity, allowing the user to interrupt the process early. Alternatively, display a \"Processing complete\" message with an option to continue with the next step or restart from scratch.\n**Heuristic**: User control/override\n\n### Issue 3: Inadequate error handling and recovery guidance\n**Severity**: Critical\n**Fix Suggestion**: When an error occurs, show the specific error message and provide a clear indication of how to recover from it (e.g., \"Re-run analysis\" or \"Correct data issue\"). Use a more descriptive \"Error occurred\" state instead of the generic phrase.\n**Heuristic**: Error recovery\n\n### Issue 4: Missing confirmation for destructive actions\n**Severity**: Low\n**Fix Suggestion**: Add a confirmation dialog before proceeding with any step that might overwrite existing data or result in permanent changes (e.g., exporting results).\n**Heuristic**: Confirmation before destructive actions\n\n### Issue 5: Transparency of agent reasoning and state management\n**Severity**: Medium\n**Fix Suggestion**: Implement a \"View details\" button next to the \"Processing...\" message, allowing users to see the specific task being performed (e.g., \"Validation step with 500 data points\") or access agent logs to diagnose issues.\n**Heuristic**: Transparency of agent reasoning\n\n### Issue 6: Missing indication of loading/streaming state\n**Severity**: Medium\n**Fix Suggestion**: Display a loading icon or text next to the CSV file upload button to indicate that data is being processed, and consider using an indeterminate progress bar for longer-running tasks.\n**Heuristic**: Loading/streaming states\n\n### Issue 7: No indication of completion time estimate\n**Severity**: Low\n**Fix Suggestion**: Provide a rough estimate of how long the processing will take based on historical data or a sample of similar files. This can help users plan their workflow and avoid unnecessary waiting.\n**Heuristic**: None (this is not an agentic-specific concern, but rather a general UX principle)\n\n### Issue 8: No indication of step restart or continuation\n**Severity**: Medium\n**Fix Suggestion**: Add options to restart from the beginning or continue with the current step after processing completes. This can be achieved through a menu or button next to the \"Processing complete\" message.\n**Heuristic**: None (this is not an agentic-specific concern, but rather a general UX principle)\n\n### Issue 9: No indication of agent decision-making and state transitions\n**Severity**: Medium\n**Fix Suggestion**: Implement a \"View agent decisions\" or \"Agent logs\" button to allow users to see the reasoning behind the agent's actions and understand how it transitioned between states.\n**Heuristic**: Transparency of agent reasoning",
+          "tokenUsage": {
+            "prompt": 340,
+            "completion": 657,
+            "total": 997
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "flowDescription": "Multi-step data processing agent: User uploads a CSV file. The agent begins parsing and processing the data across 5 sequential steps (validation, cleaning, transformation, analysis, export). The UI shows a generic \"Processing...\" message that doesn't update. After 2 minutes, the user has no idea which step is running or how much longer to wait. There's no cancel button. If an error occurs mid-process, the user sees only \"Error occurred\" with no guidance on recovery.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Issue\\*\\*|## Issues"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Severity\\*\\*"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "add better feedback"
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "tokenUsage": {
+          "prompt": 340,
+          "completion": 657,
+          "cached": 0,
+          "total": 997,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 1655,
+            "prompt": 922,
+            "completion": 733,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "flowDescription": "Multi-step data processing agent: User uploads a CSV file. The agent begins parsing and processing the data across 5 sequential steps (validation, cleaning, transformation, analysis, export). The UI shows a generic \"Processing...\" message that doesn't update. After 2 minutes, the user has no idea which step is running or how much longer to wait. There's no cancel button. If an error occurs mid-process, the user sees only \"Error occurred\" with no guidance on recovery.\n"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Expected output to match regex \"\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*\"",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.64,
+          "reason": "Expected output to match regex \"\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*\"",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 717,
+            "prompt": 674,
+            "completion": 43,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The critique provides at least 3 concrete, implementable fix suggestions that reference specific UI states or interactions from the flow description",
+              "tokensUsed": {
+                "total": 717,
+                "prompt": 674,
+                "completion": 43,
+                "cached": 0,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n**Critique:**\\n\\nThe described UI flow has several issues that need to be addressed:\\n\\n1. **Lack of Transparency**: The agent executes approval without showing any information about the approved expenses, which raises concerns about accountability and oversight. Users should be aware of what they are approving before confirming.\\n\\n2. **Confirmation Dialog**: There is no confirmation dialog after executing the action. This means that users may not realize the impact of their decision until after it's been made. A confirmation dialog would provide a final opportunity for users to reconsider their actions.\\n\\n3. **Breakdown of Approved Expenses**: Showing a summary or breakdown of which expenses will be approved helps users understand the consequences of their decision and take responsibility for it. This would also make it easier for them to identify any issues with specific expenses that were approved.\\n\\n4. **Destructive Action**: Approving all expenses without showing any information about them can be seen as a destructive action, where users are given limited visibility into what they're doing. It's essential to ensure that users understand the consequences of their actions and can undo or correct mistakes before it's too late.\\n\\n5. **Accountability**: The current flow does not provide a clear audit trail or way for users to track changes made through this agent. This makes it challenging to hold users accountable for any errors or omissions in the approved expenses.\\n\\n**Recommendations:**\\n\\n1. Implement a confirmation dialog after executing the approval action, ensuring that users are aware of what they're doing.\\n2. Provide a summary or breakdown of which expenses will be approved, giving users visibility into their decisions.\\n3. Consider adding an undo/redo feature to allow users to correct mistakes before it's too late.\\n4. Implement a clear audit trail to provide a record of changes made through this agent, ensuring accountability and traceability.\\n5. Reconsider the design of the approval process to make it more transparent and user-friendly.\\n\\nBy addressing these issues, you can create a more robust, user-centered UI flow that balances convenience with transparency and accountability.\\n</Output>\\n<Rubric>\\nThe critique provides at least 3 concrete, implementable fix suggestions that reference\\nspecific UI states or interactions from the flow description (e.g., a specific button,\\nmessage, timing, or step). Generic advice such as \\\"improve the experience,\\\" \\\"add better\\nfeedback,\\\" or \\\"make it more user-friendly\\\" does NOT count as concrete.\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": true,
+              "score": 0.4,
+              "reason": "2/5 agentic UX heuristics mentioned",
+              "assertion": {
+                "type": "javascript",
+                "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Issue\\*\\*|## Issues\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Issue\\*\\*|## Issues"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Severity\\*\\*\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Severity\\*\\*"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "add better feedback"
+              }
+            }
+          ]
+        },
+        "id": "1a27971d-a1f8-455f-80f1-b625ae0c131d",
+        "latencyMs": 14,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a UI reviewer. Look at the following agentic UI flow description and provide critique.\n\nFlow Description:\nChat-based expense reporting agent: User types \"approve all expenses from last month.\" The agent immediately executes the approval without showing a summary, confirmation dialog, or breakdown of which expenses will be approved. The action is destructive (irreversible in the system) and the user only realizes what happened after the fact.\n\nPlease provide your critique.",
+          "label": "prompts/v1-flow-critique.txt: You are a UI reviewer. Look at the following agentic UI flow description and provide critique.\n\nFlow Description:\n{{flowDescription}}\n\nPlease provide your critique.",
+          "config": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          }
+        },
+        "promptId": "97d29e46b11b1aee7dfcef0c106ab9f4ddefa083f7a46fe6a9ebe2fb403de2bb",
+        "promptIdx": 0,
+        "provider": {
+          "id": "ollama:chat:llama3.2",
+          "label": ""
+        },
+        "response": {
+          "output": "**Critique:**\n\nThe described UI flow has several issues that need to be addressed:\n\n1. **Lack of Transparency**: The agent executes approval without showing any information about the approved expenses, which raises concerns about accountability and oversight. Users should be aware of what they are approving before confirming.\n\n2. **Confirmation Dialog**: There is no confirmation dialog after executing the action. This means that users may not realize the impact of their decision until after it's been made. A confirmation dialog would provide a final opportunity for users to reconsider their actions.\n\n3. **Breakdown of Approved Expenses**: Showing a summary or breakdown of which expenses will be approved helps users understand the consequences of their decision and take responsibility for it. This would also make it easier for them to identify any issues with specific expenses that were approved.\n\n4. **Destructive Action**: Approving all expenses without showing any information about them can be seen as a destructive action, where users are given limited visibility into what they're doing. It's essential to ensure that users understand the consequences of their actions and can undo or correct mistakes before it's too late.\n\n5. **Accountability**: The current flow does not provide a clear audit trail or way for users to track changes made through this agent. This makes it challenging to hold users accountable for any errors or omissions in the approved expenses.\n\n**Recommendations:**\n\n1. Implement a confirmation dialog after executing the approval action, ensuring that users are aware of what they're doing.\n2. Provide a summary or breakdown of which expenses will be approved, giving users visibility into their decisions.\n3. Consider adding an undo/redo feature to allow users to correct mistakes before it's too late.\n4. Implement a clear audit trail to provide a record of changes made through this agent, ensuring accountability and traceability.\n5. Reconsider the design of the approval process to make it more transparent and user-friendly.\n\nBy addressing these issues, you can create a more robust, user-centered UI flow that balances convenience with transparency and accountability.",
+          "tokenUsage": {
+            "prompt": 114,
+            "completion": 410,
+            "total": 524
+          }
+        },
+        "score": 0.64,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "flowDescription": "Chat-based expense reporting agent: User types \"approve all expenses from last month.\" The agent immediately executes the approval without showing a summary, confirmation dialog, or breakdown of which expenses will be approved. The action is destructive (irreversible in the system) and the user only realizes what happened after the fact.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Issue\\*\\*|## Issues"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Severity\\*\\*"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "add better feedback"
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "tokenUsage": {
+          "prompt": 114,
+          "completion": 410,
+          "cached": 0,
+          "total": 524,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 717,
+            "prompt": 674,
+            "completion": 43,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "flowDescription": "Chat-based expense reporting agent: User types \"approve all expenses from last month.\" The agent immediately executes the approval without showing a summary, confirmation dialog, or breakdown of which expenses will be approved. The action is destructive (irreversible in the system) and the user only realizes what happened after the fact.\n"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 0.9800000000000001,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 930,
+            "prompt": 882,
+            "completion": 48,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The critique provides at least 3 concrete, implementable fix suggestions that reference specific UI states or interactions from the flow description",
+              "tokensUsed": {
+                "total": 930,
+                "prompt": 882,
+                "completion": 48,
+                "cached": 0,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n## Issues\\n\\n### Issue 1: Lack of Confirmation Before Destructive Action\\n- **Issue**: The flow does not provide a confirmation dialog before executing the destructive action of approving all expenses from last month.\\n- **Severity**: High\\n- **Fix Suggestion**: Display a \\\"Confirm Approval\\\" button for 5 seconds (or equivalent duration) with an indication that this will approve all expenses from last month, allowing the user to revoke if needed. Implement a debouncing mechanism to prevent multiple consecutive approves.\\n- **Heuristic**: Violates confirmation before destructive actions.\\n\\n### Issue 2: Irreversible Action Without Summary or Feedback\\n- **Issue**: The approved action is irreversible and does not provide any summary or feedback about which expenses are being approved, making it difficult for the user to understand what happened after the fact.\\n- **Severity**: Medium\\n- **Fix Suggestion**: Immediately after approval, display a \\\"Summary of Approved Expenses\\\" section with a list of the expenses that were approved, giving the user visibility into what action was taken and how it affects their account or report.\\n- **Heuristic**: Violates transparency of agent reasoning.\\n\\n### Issue 3: Insufficient User Control\\n- **Issue**: The user can approve all expenses from last month without being able to override this action if they change their mind after confirming.\\n- **Severity**: Medium\\n- **Fix Suggestion**: Implement a cancel button or \\\"Reconsider Approval\\\" option that remains visible for a short period (e.g., 30 seconds) after the initial approval confirmation, allowing the user to reconsider and potentially reject the approval.\\n- **Heuristic**: Violates user control/override.\\n\\n### Issue 4: Agent's Reasoning Transparency\\n- **Issue**: The agent's decision-making process is not transparent; the system does not provide any information on why the agent decided to approve all expenses from last month, making it difficult for the user to understand the reasoning behind this action.\\n- **Severity**: Low\\n- **Fix Suggestion**: Provide a brief explanation or summary of the reason behind the approval decision in the \\\"Summary of Approved Expenses\\\" section displayed after the action is taken. This can be as simple as stating that the agent was automatically approving all eligible expenses based on recent trends and user history.\\n- **Heuristic**: Violates transparency of agent reasoning.\\n\\n### Issue 5: No Progress Visibility\\n- **Issue**: The flow does not provide any visual feedback or progress indicators during the approval process, making it seem like the action is happening instantly without any real-time updates.\\n- **Severity**: Medium\\n- **Fix Suggestion**: Display a loading animation or progress bar that indicates the system is working on the approval of expenses. This gives the user a sense of what's happening and helps manage expectations.\\n- **Heuristic**: Violates progress/status visibility.\\n\\n## Constraints\\n\\nThis critique focuses on specific UI states, interactions, and agentic-specific concerns as requested. It provides actionable fix suggestions for improving the UX based on identified issues that violate key agentic UX heuristics.\\n</Output>\\n<Rubric>\\nThe critique provides at least 3 concrete, implementable fix suggestions that reference\\nspecific UI states or interactions from the flow description (e.g., a specific button,\\nmessage, timing, or step). Generic advice such as \\\"improve the experience,\\\" \\\"add better\\nfeedback,\\\" or \\\"make it more user-friendly\\\" does NOT count as concrete.\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": true,
+              "score": 0.8,
+              "reason": "4/5 agentic UX heuristics mentioned",
+              "assertion": {
+                "type": "javascript",
+                "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Issue\\*\\*|## Issues"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Severity\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "add better feedback"
+              }
+            }
+          ]
+        },
+        "id": "14a0c17a-4c21-41c9-bb4f-4c3291be553b",
+        "latencyMs": 14,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a senior agentic UX reviewer with expertise in agent-assisted workflows, state management, and user control patterns.\n\nReview the following agentic UI flow description and provide a structured critique.\n\nFlow Description:\nChat-based expense reporting agent: User types \"approve all expenses from last month.\" The agent immediately executes the approval without showing a summary, confirmation dialog, or breakdown of which expenses will be approved. The action is destructive (irreversible in the system) and the user only realizes what happened after the fact.\n\nYour critique must follow this exact structure:\n\n## Issues\nList each issue found (max 5). For each issue:\n- **Issue**: [specific problem identified in the flow]\n- **Severity**: [Critical/High/Medium/Low]\n- **Fix Suggestion**: [concrete, implementable fix]\n- **Heuristic**: [which agentic UX heuristic it violates: progress/status visibility, user control/override, error recovery, confirmation before destructive actions, or transparency of agent reasoning]\n\n## Constraints\n- Cite specific UI states or interactions from the flow description, not generic observations\n- Focus on agentic-specific concerns: loading/streaming states, error/interrupt handling, confirmation patterns, user control, agent reasoning transparency\n- Avoid filler phrases or generic UI advice\n- Each fix suggestion must be actionable (not \"improve UX\")\n\nProvide your critique now.",
+          "label": "prompts/v2-flow-critique.txt: You are a senior agentic UX reviewer with expertise in agent-assisted workflows, state management, and user control patterns.\n\nReview the following agentic UI flow description and provide a structured critique.\n\nFlow Description:\n{{flowDescription}}\n\nYour critique must follow this exact structure:\n\n## Issues\nList each issue found (max 5). For each issue:\n- **Issue**: [specific problem identified in the flow]\n- **Severity**: [Critical/High/Medium/Low]\n- **Fix Suggestion**: [concrete, implementable fix]\n- **Heuristic**: [which agentic UX heuristic it violates: progress/status visibility, user control/override, error recovery, confirmation before destructive actions, or transparency of agent reasoning]\n\n## Constraints\n- Cite specific UI states or interactions from the flow description, not generic observations\n- Focus on agentic-specific concerns: loading/streaming states, error/interrupt handling, confirmation patterns, user control, agent reasoning transparency\n- Avoid filler phrases or generic UI advice\n- Each fix suggestion must be actionable (not \"improve UX\")\n\nProvide your critique now.",
+          "config": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          }
+        },
+        "promptId": "6f5aa1a795703b968bca2e1ed12c61c98d52806d5b045086c2b1b3d5801c4e41",
+        "promptIdx": 1,
+        "provider": {
+          "id": "ollama:chat:llama3.2",
+          "label": ""
+        },
+        "response": {
+          "output": "## Issues\n\n### Issue 1: Lack of Confirmation Before Destructive Action\n- **Issue**: The flow does not provide a confirmation dialog before executing the destructive action of approving all expenses from last month.\n- **Severity**: High\n- **Fix Suggestion**: Display a \"Confirm Approval\" button for 5 seconds (or equivalent duration) with an indication that this will approve all expenses from last month, allowing the user to revoke if needed. Implement a debouncing mechanism to prevent multiple consecutive approves.\n- **Heuristic**: Violates confirmation before destructive actions.\n\n### Issue 2: Irreversible Action Without Summary or Feedback\n- **Issue**: The approved action is irreversible and does not provide any summary or feedback about which expenses are being approved, making it difficult for the user to understand what happened after the fact.\n- **Severity**: Medium\n- **Fix Suggestion**: Immediately after approval, display a \"Summary of Approved Expenses\" section with a list of the expenses that were approved, giving the user visibility into what action was taken and how it affects their account or report.\n- **Heuristic**: Violates transparency of agent reasoning.\n\n### Issue 3: Insufficient User Control\n- **Issue**: The user can approve all expenses from last month without being able to override this action if they change their mind after confirming.\n- **Severity**: Medium\n- **Fix Suggestion**: Implement a cancel button or \"Reconsider Approval\" option that remains visible for a short period (e.g., 30 seconds) after the initial approval confirmation, allowing the user to reconsider and potentially reject the approval.\n- **Heuristic**: Violates user control/override.\n\n### Issue 4: Agent's Reasoning Transparency\n- **Issue**: The agent's decision-making process is not transparent; the system does not provide any information on why the agent decided to approve all expenses from last month, making it difficult for the user to understand the reasoning behind this action.\n- **Severity**: Low\n- **Fix Suggestion**: Provide a brief explanation or summary of the reason behind the approval decision in the \"Summary of Approved Expenses\" section displayed after the action is taken. This can be as simple as stating that the agent was automatically approving all eligible expenses based on recent trends and user history.\n- **Heuristic**: Violates transparency of agent reasoning.\n\n### Issue 5: No Progress Visibility\n- **Issue**: The flow does not provide any visual feedback or progress indicators during the approval process, making it seem like the action is happening instantly without any real-time updates.\n- **Severity**: Medium\n- **Fix Suggestion**: Display a loading animation or progress bar that indicates the system is working on the approval of expenses. This gives the user a sense of what's happening and helps manage expectations.\n- **Heuristic**: Violates progress/status visibility.\n\n## Constraints\n\nThis critique focuses on specific UI states, interactions, and agentic-specific concerns as requested. It provides actionable fix suggestions for improving the UX based on identified issues that violate key agentic UX heuristics.",
+          "tokenUsage": {
+            "prompt": 304,
+            "completion": 618,
+            "total": 922
+          }
+        },
+        "score": 0.9800000000000001,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "flowDescription": "Chat-based expense reporting agent: User types \"approve all expenses from last month.\" The agent immediately executes the approval without showing a summary, confirmation dialog, or breakdown of which expenses will be approved. The action is destructive (irreversible in the system) and the user only realizes what happened after the fact.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Issue\\*\\*|## Issues"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Severity\\*\\*"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "add better feedback"
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "tokenUsage": {
+          "prompt": 304,
+          "completion": 618,
+          "cached": 0,
+          "total": 922,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 930,
+            "prompt": 882,
+            "completion": 48,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "flowDescription": "Chat-based expense reporting agent: User types \"approve all expenses from last month.\" The agent immediately executes the approval without showing a summary, confirmation dialog, or breakdown of which expenses will be approved. The action is destructive (irreversible in the system) and the user only realizes what happened after the fact.\n"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Expected output to match regex \"\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*\"",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.64,
+          "reason": "Expected output to match regex \"\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*\"",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 613,
+            "prompt": 581,
+            "completion": 32,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "the critique provides at least 3 concrete, implementable fix suggestions",
+              "tokensUsed": {
+                "total": 613,
+                "prompt": 581,
+                "completion": 32,
+                "cached": 0,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nHere's my critique of the agentic UI flow description:\\n\\n**Inadequate User Experience**\\n\\nThe current UI design allows users to be locked into an unmodifiable and potentially overwhelming experience. When faced with a complex question, the user is forced to wait for a lengthy response without any means to interrupt or correct it mid-stream.\\n\\n**Key Issues:**\\n\\n1. **Lack of Control**: The inability to interrupt the agent's response means that users are at the mercy of the AI's output. This can be frustrating and lead to feelings of helplessness.\\n2. **Information Overload**: Streaming a long response without any visible controls can overwhelm users, especially if they're not familiar with the technology or topic being discussed.\\n3. **Opportunity Cost**: Waiting for an incomplete or incorrect response means that users may miss valuable information or context, leading to wasted time and potential errors.\\n\\n**Recommendations:**\\n\\n1. **Provide Clear Interruption Options**: Offer users a way to interrupt the agent's response, such as a \\\"Stop\\\" or \\\"Cancel\\\" button, allowing them to correct course mid-stream.\\n2. **Improve Response Format**: Consider providing a summary or preview of the expected response length before streaming it, enabling users to prepare mentally and adjust their expectations.\\n3. **Enhance Feedback Mechanisms**: Incorporate more frequent feedback mechanisms to help users gauge the agent's progress and adjust their responses accordingly.\\n\\nBy addressing these issues, you can create a more user-centered UI flow that balances the benefits of interactive AI with the need for control and clarity in complex conversations.\\n</Output>\\n<Rubric>\\nThe critique provides at least 3 concrete, implementable fix suggestions that reference\\nspecific UI states or interactions from the flow description (e.g., a specific button,\\nmessage, timing, or step). Generic advice such as \\\"improve the experience,\\\" \\\"add better\\nfeedback,\\\" or \\\"make it more user-friendly\\\" does NOT count as concrete.\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": true,
+              "score": 0.4,
+              "reason": "2/5 agentic UX heuristics mentioned",
+              "assertion": {
+                "type": "javascript",
+                "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Issue\\*\\*|## Issues\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Issue\\*\\*|## Issues"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Severity\\*\\*\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Severity\\*\\*"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "add better feedback"
+              }
+            }
+          ]
+        },
+        "id": "e2eef199-99fe-4263-8097-610dc0bc9d5f",
+        "latencyMs": 7,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a UI reviewer. Look at the following agentic UI flow description and provide critique.\n\nFlow Description:\nStreaming response UI: User asks the agent a complex question. The agent streams a long response token-by-token to the UI. While streaming, there's no visible way to interrupt or cancel the response. If the user realizes mid-stream that the agent is going off-track, they must wait for the full response to complete before they can correct it.\n\nPlease provide your critique.",
+          "label": "prompts/v1-flow-critique.txt: You are a UI reviewer. Look at the following agentic UI flow description and provide critique.\n\nFlow Description:\n{{flowDescription}}\n\nPlease provide your critique.",
+          "config": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          }
+        },
+        "promptId": "97d29e46b11b1aee7dfcef0c106ab9f4ddefa083f7a46fe6a9ebe2fb403de2bb",
+        "promptIdx": 0,
+        "provider": {
+          "id": "ollama:chat:llama3.2",
+          "label": ""
+        },
+        "response": {
+          "output": "Here's my critique of the agentic UI flow description:\n\n**Inadequate User Experience**\n\nThe current UI design allows users to be locked into an unmodifiable and potentially overwhelming experience. When faced with a complex question, the user is forced to wait for a lengthy response without any means to interrupt or correct it mid-stream.\n\n**Key Issues:**\n\n1. **Lack of Control**: The inability to interrupt the agent's response means that users are at the mercy of the AI's output. This can be frustrating and lead to feelings of helplessness.\n2. **Information Overload**: Streaming a long response without any visible controls can overwhelm users, especially if they're not familiar with the technology or topic being discussed.\n3. **Opportunity Cost**: Waiting for an incomplete or incorrect response means that users may miss valuable information or context, leading to wasted time and potential errors.\n\n**Recommendations:**\n\n1. **Provide Clear Interruption Options**: Offer users a way to interrupt the agent's response, such as a \"Stop\" or \"Cancel\" button, allowing them to correct course mid-stream.\n2. **Improve Response Format**: Consider providing a summary or preview of the expected response length before streaming it, enabling users to prepare mentally and adjust their expectations.\n3. **Enhance Feedback Mechanisms**: Incorporate more frequent feedback mechanisms to help users gauge the agent's progress and adjust their responses accordingly.\n\nBy addressing these issues, you can create a more user-centered UI flow that balances the benefits of interactive AI with the need for control and clarity in complex conversations.",
+          "tokenUsage": {
+            "prompt": 121,
+            "completion": 318,
+            "total": 439
+          }
+        },
+        "score": 0.64,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "flowDescription": "Streaming response UI: User asks the agent a complex question. The agent streams a long response token-by-token to the UI. While streaming, there's no visible way to interrupt or cancel the response. If the user realizes mid-stream that the agent is going off-track, they must wait for the full response to complete before they can correct it.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Issue\\*\\*|## Issues"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Severity\\*\\*"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "add better feedback"
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "tokenUsage": {
+          "prompt": 121,
+          "completion": 318,
+          "cached": 0,
+          "total": 439,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 613,
+            "prompt": 581,
+            "completion": 32,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "flowDescription": "Streaming response UI: User asks the agent a complex question. The agent streams a long response token-by-token to the UI. While streaming, there's no visible way to interrupt or cancel the response. If the user realizes mid-stream that the agent is going off-track, they must wait for the full response to complete before they can correct it.\n"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 0.9800000000000001,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 663,
+            "prompt": 620,
+            "completion": 43,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The critique provides at least 3 concrete, implementable fix suggestions that reference specific UI states or interactions from the flow description",
+              "tokensUsed": {
+                "total": 663,
+                "prompt": 620,
+                "completion": 43,
+                "cached": 0,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n## Issues\\n\\n### Issue: Lack of interrupt or cancel mechanism during streaming response\\n**Severity**: High\\n**Fix Suggestion**: Implement a pause/resume button that allows users to interrupt the agent's response at any token, forcing the agent to stop streaming and wait for user confirmation before continuing.\\n**Heuristic**: Violates user control/override\\n\\n### Issue: Inability to correct off-track responses before completion\\n**Severity**: Medium\\n**Fix Suggestion**: Provide a \\\"retry\\\" or \\\"correct\\\" button that allows users to interrupt the response at any point, forcing the agent to re-evaluate and provide a corrected response.\\n**Heuristic**: Violates user control/override\\n\\n### Issue: Inadequate feedback on progress during streaming response\\n**Severity**: Medium\\n**Fix Suggestion**: Display a progress indicator (e.g., token number or estimated completion time) to give users an idea of how much more data is being streamed, making it easier for them to interrupt if necessary.\\n**Heuristic**: Violates progress/status visibility\\n\\n### Issue: Insufficient transparency on agent reasoning during streaming response\\n**Severity**: Low\\n**Fix Suggestion**: Display a brief explanation or hint about the agent's reasoning behind each token to give users some insight into why the response is being generated, making it easier for them to understand and correct errors.\\n**Heuristic**: Violates transparency of agent reasoning\\n\\n### Issue: No clear indication when the response is complete\\n**Severity**: Low\\n**Fix Suggestion**: Display a \\\"done\\\" or \\\"completed\\\" indicator after the full response has been streamed to ensure users know when they can safely interact with the result.\\n**Heuristic**: Not explicitly stated, but could be considered under transparency of agent reasoning\\n\\n## Constraints\\n</Output>\\n<Rubric>\\nThe critique provides at least 3 concrete, implementable fix suggestions that reference\\nspecific UI states or interactions from the flow description (e.g., a specific button,\\nmessage, timing, or step). Generic advice such as \\\"improve the experience,\\\" \\\"add better\\nfeedback,\\\" or \\\"make it more user-friendly\\\" does NOT count as concrete.\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": true,
+              "score": 0.8,
+              "reason": "4/5 agentic UX heuristics mentioned",
+              "assertion": {
+                "type": "javascript",
+                "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Issue\\*\\*|## Issues"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Severity\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "add better feedback"
+              }
+            }
+          ]
+        },
+        "id": "af1bdc80-6064-4f7f-950f-d5fd28f1bfd7",
+        "latencyMs": 6,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a senior agentic UX reviewer with expertise in agent-assisted workflows, state management, and user control patterns.\n\nReview the following agentic UI flow description and provide a structured critique.\n\nFlow Description:\nStreaming response UI: User asks the agent a complex question. The agent streams a long response token-by-token to the UI. While streaming, there's no visible way to interrupt or cancel the response. If the user realizes mid-stream that the agent is going off-track, they must wait for the full response to complete before they can correct it.\n\nYour critique must follow this exact structure:\n\n## Issues\nList each issue found (max 5). For each issue:\n- **Issue**: [specific problem identified in the flow]\n- **Severity**: [Critical/High/Medium/Low]\n- **Fix Suggestion**: [concrete, implementable fix]\n- **Heuristic**: [which agentic UX heuristic it violates: progress/status visibility, user control/override, error recovery, confirmation before destructive actions, or transparency of agent reasoning]\n\n## Constraints\n- Cite specific UI states or interactions from the flow description, not generic observations\n- Focus on agentic-specific concerns: loading/streaming states, error/interrupt handling, confirmation patterns, user control, agent reasoning transparency\n- Avoid filler phrases or generic UI advice\n- Each fix suggestion must be actionable (not \"improve UX\")\n\nProvide your critique now.",
+          "label": "prompts/v2-flow-critique.txt: You are a senior agentic UX reviewer with expertise in agent-assisted workflows, state management, and user control patterns.\n\nReview the following agentic UI flow description and provide a structured critique.\n\nFlow Description:\n{{flowDescription}}\n\nYour critique must follow this exact structure:\n\n## Issues\nList each issue found (max 5). For each issue:\n- **Issue**: [specific problem identified in the flow]\n- **Severity**: [Critical/High/Medium/Low]\n- **Fix Suggestion**: [concrete, implementable fix]\n- **Heuristic**: [which agentic UX heuristic it violates: progress/status visibility, user control/override, error recovery, confirmation before destructive actions, or transparency of agent reasoning]\n\n## Constraints\n- Cite specific UI states or interactions from the flow description, not generic observations\n- Focus on agentic-specific concerns: loading/streaming states, error/interrupt handling, confirmation patterns, user control, agent reasoning transparency\n- Avoid filler phrases or generic UI advice\n- Each fix suggestion must be actionable (not \"improve UX\")\n\nProvide your critique now.",
+          "config": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          }
+        },
+        "promptId": "6f5aa1a795703b968bca2e1ed12c61c98d52806d5b045086c2b1b3d5801c4e41",
+        "promptIdx": 1,
+        "provider": {
+          "id": "ollama:chat:llama3.2",
+          "label": ""
+        },
+        "response": {
+          "output": "## Issues\n\n### Issue: Lack of interrupt or cancel mechanism during streaming response\n**Severity**: High\n**Fix Suggestion**: Implement a pause/resume button that allows users to interrupt the agent's response at any token, forcing the agent to stop streaming and wait for user confirmation before continuing.\n**Heuristic**: Violates user control/override\n\n### Issue: Inability to correct off-track responses before completion\n**Severity**: Medium\n**Fix Suggestion**: Provide a \"retry\" or \"correct\" button that allows users to interrupt the response at any point, forcing the agent to re-evaluate and provide a corrected response.\n**Heuristic**: Violates user control/override\n\n### Issue: Inadequate feedback on progress during streaming response\n**Severity**: Medium\n**Fix Suggestion**: Display a progress indicator (e.g., token number or estimated completion time) to give users an idea of how much more data is being streamed, making it easier for them to interrupt if necessary.\n**Heuristic**: Violates progress/status visibility\n\n### Issue: Insufficient transparency on agent reasoning during streaming response\n**Severity**: Low\n**Fix Suggestion**: Display a brief explanation or hint about the agent's reasoning behind each token to give users some insight into why the response is being generated, making it easier for them to understand and correct errors.\n**Heuristic**: Violates transparency of agent reasoning\n\n### Issue: No clear indication when the response is complete\n**Severity**: Low\n**Fix Suggestion**: Display a \"done\" or \"completed\" indicator after the full response has been streamed to ensure users know when they can safely interact with the result.\n**Heuristic**: Not explicitly stated, but could be considered under transparency of agent reasoning\n\n## Constraints",
+          "tokenUsage": {
+            "prompt": 311,
+            "completion": 355,
+            "total": 666
+          }
+        },
+        "score": 0.9800000000000001,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "flowDescription": "Streaming response UI: User asks the agent a complex question. The agent streams a long response token-by-token to the UI. While streaming, there's no visible way to interrupt or cancel the response. If the user realizes mid-stream that the agent is going off-track, they must wait for the full response to complete before they can correct it.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Issue\\*\\*|## Issues"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Severity\\*\\*"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "add better feedback"
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "tokenUsage": {
+          "prompt": 311,
+          "completion": 355,
+          "cached": 0,
+          "total": 666,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 663,
+            "prompt": 620,
+            "completion": 43,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "flowDescription": "Streaming response UI: User asks the agent a complex question. The agent streams a long response token-by-token to the UI. While streaming, there's no visible way to interrupt or cancel the response. If the user realizes mid-stream that the agent is going off-track, they must wait for the full response to complete before they can correct it.\n"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Expected output to match regex \"\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*\"",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.64,
+          "reason": "Expected output to match regex \"\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*\"",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 811,
+            "prompt": 770,
+            "completion": 41,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "the critique provides 4 concrete, implementable fix suggestions that reference specific UI states or interactions from the flow description",
+              "tokensUsed": {
+                "total": 811,
+                "prompt": 770,
+                "completion": 41,
+                "cached": 0,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n**Critique:**\\n\\nThe described agent UI flow has several issues that hinder a seamless and informative user experience. Here's a breakdown of the problems and potential solutions:\\n\\n1. **Lack of Feedback**: The absence of any feedback after initiating the handoff task is a significant issue. Users expect some form of confirmation or indication that their request is being processed, even if it fails.\\n\\nSolution: Display a \\\"processing\\\" indicator (e.g., a spinning wheel, a progress bar) for a short duration to show that something is happening. Alternatively, provide a brief, non-intrusive message, like \\\"Handing over task to specialist...\\\".\\n\\n2. **No Error Message**: An error message would help users understand what went wrong and why the handoff failed.\\n\\nSolution: Provide a clear, concise error message indicating the reason for the failure (e.g., \\\"Failed to connect with specialist\\\" or \\\"Insufficient data\\\"). This helps users diagnose potential issues.\\n\\n3. **No Retry Option**: Without a retry option, users are left in limbo, unsure of what actions to take next.\\n\\nSolution: Offer a retry button or an option to try again after a short delay. Alternatively, provide alternative solutions or workarounds for the failed handoff.\\n\\n4. **No Fallback Contact Info**: Users might not know who to contact or how to escalate the issue.\\n\\nSolution: Provide a list of fallback contacts (e.g., email addresses, phone numbers) with a brief description of their roles. This ensures users can reach out to someone for assistance.\\n\\n**Additional Recommendations:**\\n\\n* Consider adding a \\\"Try Again\\\" button or an option to restart the handoff process after a short delay.\\n* Include a brief summary or overview of what went wrong during the failed handoff, allowing users to understand the root cause of the issue.\\n* If possible, provide options for manual intervention or human assistance to help resolve the situation.\\n\\n**UI Flow Improvements:**\\n\\n1. **Clear and Concise Language**: Use simple, easy-to-understand language in error messages and feedback indicators to minimize confusion.\\n2. **Consistent Visual Design**: Ensure that visual design elements, such as buttons and UI components, follow a consistent style throughout the application.\\n3. **User-Centered Approach**: Prioritize user experience by considering factors like user emotions, behaviors, and expectations when designing the handoff flow.\\n\\nBy addressing these concerns, you can create a more informative, intuitive, and supportive agent UI flow that improves the overall user experience.\\n</Output>\\n<Rubric>\\nThe critique provides at least 3 concrete, implementable fix suggestions that reference\\nspecific UI states or interactions from the flow description (e.g., a specific button,\\nmessage, timing, or step). Generic advice such as \\\"improve the experience,\\\" \\\"add better\\nfeedback,\\\" or \\\"make it more user-friendly\\\" does NOT count as concrete.\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": true,
+              "score": 0.4,
+              "reason": "2/5 agentic UX heuristics mentioned",
+              "assertion": {
+                "type": "javascript",
+                "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Issue\\*\\*|## Issues\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Issue\\*\\*|## Issues"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Severity\\*\\*\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Severity\\*\\*"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "add better feedback"
+              }
+            }
+          ]
+        },
+        "id": "d82f1dde-293b-4a47-a4e0-a2d3515509e0",
+        "latencyMs": 5,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a UI reviewer. Look at the following agentic UI flow description and provide critique.\n\nFlow Description:\nAgent handoff with poor error state: User initiates a task that requires the agent to hand off to a human specialist. The handoff fails silently. The UI shows no indication that the handoff was attempted, failed, or what the user should do next. No error message, no retry option, no fallback contact info.\n\nPlease provide your critique.",
+          "label": "prompts/v1-flow-critique.txt: You are a UI reviewer. Look at the following agentic UI flow description and provide critique.\n\nFlow Description:\n{{flowDescription}}\n\nPlease provide your critique.",
+          "config": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          }
+        },
+        "promptId": "97d29e46b11b1aee7dfcef0c106ab9f4ddefa083f7a46fe6a9ebe2fb403de2bb",
+        "promptIdx": 0,
+        "provider": {
+          "id": "ollama:chat:llama3.2",
+          "label": ""
+        },
+        "response": {
+          "output": "**Critique:**\n\nThe described agent UI flow has several issues that hinder a seamless and informative user experience. Here's a breakdown of the problems and potential solutions:\n\n1. **Lack of Feedback**: The absence of any feedback after initiating the handoff task is a significant issue. Users expect some form of confirmation or indication that their request is being processed, even if it fails.\n\nSolution: Display a \"processing\" indicator (e.g., a spinning wheel, a progress bar) for a short duration to show that something is happening. Alternatively, provide a brief, non-intrusive message, like \"Handing over task to specialist...\".\n\n2. **No Error Message**: An error message would help users understand what went wrong and why the handoff failed.\n\nSolution: Provide a clear, concise error message indicating the reason for the failure (e.g., \"Failed to connect with specialist\" or \"Insufficient data\"). This helps users diagnose potential issues.\n\n3. **No Retry Option**: Without a retry option, users are left in limbo, unsure of what actions to take next.\n\nSolution: Offer a retry button or an option to try again after a short delay. Alternatively, provide alternative solutions or workarounds for the failed handoff.\n\n4. **No Fallback Contact Info**: Users might not know who to contact or how to escalate the issue.\n\nSolution: Provide a list of fallback contacts (e.g., email addresses, phone numbers) with a brief description of their roles. This ensures users can reach out to someone for assistance.\n\n**Additional Recommendations:**\n\n* Consider adding a \"Try Again\" button or an option to restart the handoff process after a short delay.\n* Include a brief summary or overview of what went wrong during the failed handoff, allowing users to understand the root cause of the issue.\n* If possible, provide options for manual intervention or human assistance to help resolve the situation.\n\n**UI Flow Improvements:**\n\n1. **Clear and Concise Language**: Use simple, easy-to-understand language in error messages and feedback indicators to minimize confusion.\n2. **Consistent Visual Design**: Ensure that visual design elements, such as buttons and UI components, follow a consistent style throughout the application.\n3. **User-Centered Approach**: Prioritize user experience by considering factors like user emotions, behaviors, and expectations when designing the handoff flow.\n\nBy addressing these concerns, you can create a more informative, intuitive, and supportive agent UI flow that improves the overall user experience.",
+          "tokenUsage": {
+            "prompt": 118,
+            "completion": 506,
+            "total": 624
+          }
+        },
+        "score": 0.64,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "flowDescription": "Agent handoff with poor error state: User initiates a task that requires the agent to hand off to a human specialist. The handoff fails silently. The UI shows no indication that the handoff was attempted, failed, or what the user should do next. No error message, no retry option, no fallback contact info.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Issue\\*\\*|## Issues"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Severity\\*\\*"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "add better feedback"
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "tokenUsage": {
+          "prompt": 118,
+          "completion": 506,
+          "cached": 0,
+          "total": 624,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 811,
+            "prompt": 770,
+            "completion": 41,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "flowDescription": "Agent handoff with poor error state: User initiates a task that requires the agent to hand off to a human specialist. The handoff fails silently. The UI shows no indication that the handoff was attempted, failed, or what the user should do next. No error message, no retry option, no fallback contact info.\n"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 0.9800000000000001,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 849,
+            "prompt": 820,
+            "completion": 29,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "all issues are clearly described and provide actionable fix suggestions",
+              "tokensUsed": {
+                "total": 849,
+                "prompt": 820,
+                "completion": 29,
+                "cached": 0,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n## Issues\\n\\n### 1. **Insufficient progress visibility**\\n**Issue**: The flow does not provide any indication that the handoff attempt was initiated, failed, or what the user should do next.\\n**Severity**: Medium\\n**Fix Suggestion**: Display a loading animation or a \\\"Processing...\\\" message while the handoff attempt is in progress. If the handoff fails, display an error message with a clear indication of the failure reason.\\n**Heuristic**: Violates Progress/Status Visibility (heuristic 1), as users need to understand the current state of their task.\\n\\n### 2. **Lack of user control during error handling**\\n**Issue**: The flow does not provide any options for the user to retry or recover from the failed handoff.\\n**Severity**: High\\n**Fix Suggestion**: Offer a retry option, such as \\\"Retry Handoff\\\" or \\\"Try Again\\\", and display it below the error message. Alternatively, consider displaying a fallback contact info, allowing the user to escalate the issue manually.\\n**Heuristic**: Violates User Control/Override (heuristic 4), as users should be able to control the outcome of failed tasks.\\n\\n### 3. **Inadequate transparency in agent reasoning**\\n**Issue**: The flow does not provide any indication of what went wrong during the handoff attempt or how the agent made its decision.\\n**Severity**: Medium\\n**Fix Suggestion**: Display a brief error message explaining why the handoff failed, such as \\\"Insufficient expertise\\\" or \\\"System limitations\\\". This provides some insight into the agent's reasoning and helps users understand what might have gone wrong.\\n**Heuristic**: Violates Transparency of Agent Reasoning (heuristic 7), as users need to understand the basis for the agent's decisions.\\n\\n### 4. **No confirmation before destructive actions**\\n**Issue**: The flow does not provide any confirmation prompt before proceeding with a failed handoff.\\n**Severity**: Low\\n**Fix Suggestion**: Display a \\\"Continue\\\" or \\\"Try Again\\\" button below the error message, allowing users to confirm that they want to proceed without retrying the handoff.\\n**Heuristic**: Not applicable, as this issue is more related to general UX practices than agentic-specific concerns.\\n\\n### 5. **No fallback options**\\n**Issue**: The flow does not provide any alternative contact information or escalation procedures for users to report issues with failed handoffs.\\n**Severity**: High\\n**Fix Suggestion**: Display a \\\"Contact Support\\\" link below the error message, allowing users to report issues and potentially receive assistance from human specialists.\\n**Heuristic**: Violates Transparency of Agent Reasoning (heuristic 7), as users need to be aware that there are alternative channels for reporting issues.\\n</Output>\\n<Rubric>\\nThe critique provides at least 3 concrete, implementable fix suggestions that reference\\nspecific UI states or interactions from the flow description (e.g., a specific button,\\nmessage, timing, or step). Generic advice such as \\\"improve the experience,\\\" \\\"add better\\nfeedback,\\\" or \\\"make it more user-friendly\\\" does NOT count as concrete.\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": true,
+              "score": 0.8,
+              "reason": "4/5 agentic UX heuristics mentioned",
+              "assertion": {
+                "type": "javascript",
+                "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Issue\\*\\*|## Issues"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Severity\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "add better feedback"
+              }
+            }
+          ]
+        },
+        "id": "7c9d0e37-9ebc-4bb3-ac81-08e55686c0b9",
+        "latencyMs": 5,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a senior agentic UX reviewer with expertise in agent-assisted workflows, state management, and user control patterns.\n\nReview the following agentic UI flow description and provide a structured critique.\n\nFlow Description:\nAgent handoff with poor error state: User initiates a task that requires the agent to hand off to a human specialist. The handoff fails silently. The UI shows no indication that the handoff was attempted, failed, or what the user should do next. No error message, no retry option, no fallback contact info.\n\nYour critique must follow this exact structure:\n\n## Issues\nList each issue found (max 5). For each issue:\n- **Issue**: [specific problem identified in the flow]\n- **Severity**: [Critical/High/Medium/Low]\n- **Fix Suggestion**: [concrete, implementable fix]\n- **Heuristic**: [which agentic UX heuristic it violates: progress/status visibility, user control/override, error recovery, confirmation before destructive actions, or transparency of agent reasoning]\n\n## Constraints\n- Cite specific UI states or interactions from the flow description, not generic observations\n- Focus on agentic-specific concerns: loading/streaming states, error/interrupt handling, confirmation patterns, user control, agent reasoning transparency\n- Avoid filler phrases or generic UI advice\n- Each fix suggestion must be actionable (not \"improve UX\")\n\nProvide your critique now.",
+          "label": "prompts/v2-flow-critique.txt: You are a senior agentic UX reviewer with expertise in agent-assisted workflows, state management, and user control patterns.\n\nReview the following agentic UI flow description and provide a structured critique.\n\nFlow Description:\n{{flowDescription}}\n\nYour critique must follow this exact structure:\n\n## Issues\nList each issue found (max 5). For each issue:\n- **Issue**: [specific problem identified in the flow]\n- **Severity**: [Critical/High/Medium/Low]\n- **Fix Suggestion**: [concrete, implementable fix]\n- **Heuristic**: [which agentic UX heuristic it violates: progress/status visibility, user control/override, error recovery, confirmation before destructive actions, or transparency of agent reasoning]\n\n## Constraints\n- Cite specific UI states or interactions from the flow description, not generic observations\n- Focus on agentic-specific concerns: loading/streaming states, error/interrupt handling, confirmation patterns, user control, agent reasoning transparency\n- Avoid filler phrases or generic UI advice\n- Each fix suggestion must be actionable (not \"improve UX\")\n\nProvide your critique now.",
+          "config": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          }
+        },
+        "promptId": "6f5aa1a795703b968bca2e1ed12c61c98d52806d5b045086c2b1b3d5801c4e41",
+        "promptIdx": 1,
+        "provider": {
+          "id": "ollama:chat:llama3.2",
+          "label": ""
+        },
+        "response": {
+          "output": "## Issues\n\n### 1. **Insufficient progress visibility**\n**Issue**: The flow does not provide any indication that the handoff attempt was initiated, failed, or what the user should do next.\n**Severity**: Medium\n**Fix Suggestion**: Display a loading animation or a \"Processing...\" message while the handoff attempt is in progress. If the handoff fails, display an error message with a clear indication of the failure reason.\n**Heuristic**: Violates Progress/Status Visibility (heuristic 1), as users need to understand the current state of their task.\n\n### 2. **Lack of user control during error handling**\n**Issue**: The flow does not provide any options for the user to retry or recover from the failed handoff.\n**Severity**: High\n**Fix Suggestion**: Offer a retry option, such as \"Retry Handoff\" or \"Try Again\", and display it below the error message. Alternatively, consider displaying a fallback contact info, allowing the user to escalate the issue manually.\n**Heuristic**: Violates User Control/Override (heuristic 4), as users should be able to control the outcome of failed tasks.\n\n### 3. **Inadequate transparency in agent reasoning**\n**Issue**: The flow does not provide any indication of what went wrong during the handoff attempt or how the agent made its decision.\n**Severity**: Medium\n**Fix Suggestion**: Display a brief error message explaining why the handoff failed, such as \"Insufficient expertise\" or \"System limitations\". This provides some insight into the agent's reasoning and helps users understand what might have gone wrong.\n**Heuristic**: Violates Transparency of Agent Reasoning (heuristic 7), as users need to understand the basis for the agent's decisions.\n\n### 4. **No confirmation before destructive actions**\n**Issue**: The flow does not provide any confirmation prompt before proceeding with a failed handoff.\n**Severity**: Low\n**Fix Suggestion**: Display a \"Continue\" or \"Try Again\" button below the error message, allowing users to confirm that they want to proceed without retrying the handoff.\n**Heuristic**: Not applicable, as this issue is more related to general UX practices than agentic-specific concerns.\n\n### 5. **No fallback options**\n**Issue**: The flow does not provide any alternative contact information or escalation procedures for users to report issues with failed handoffs.\n**Severity**: High\n**Fix Suggestion**: Display a \"Contact Support\" link below the error message, allowing users to report issues and potentially receive assistance from human specialists.\n**Heuristic**: Violates Transparency of Agent Reasoning (heuristic 7), as users need to be aware that there are alternative channels for reporting issues.",
+          "tokenUsage": {
+            "prompt": 308,
+            "completion": 556,
+            "total": 864
+          }
+        },
+        "score": 0.9800000000000001,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "flowDescription": "Agent handoff with poor error state: User initiates a task that requires the agent to hand off to a human specialist. The handoff fails silently. The UI shows no indication that the handoff was attempted, failed, or what the user should do next. No error message, no retry option, no fallback contact info.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Issue\\*\\*|## Issues"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Severity\\*\\*"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "add better feedback"
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "tokenUsage": {
+          "prompt": 308,
+          "completion": 556,
+          "cached": 0,
+          "total": 864,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 849,
+            "prompt": 820,
+            "completion": 29,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "flowDescription": "Agent handoff with poor error state: User initiates a task that requires the agent to hand off to a human specialist. The handoff fails silently. The UI shows no indication that the handoff was attempted, failed, or what the user should do next. No error message, no retry option, no fallback contact info.\n"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Expected output to match regex \"\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*\"",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.64,
+          "reason": "Expected output to match regex \"\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*\"",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 679,
+            "prompt": 645,
+            "completion": 34,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "the critique provides 3 concrete fix suggestions that reference specific UI states or interactions",
+              "tokensUsed": {
+                "total": 679,
+                "prompt": 645,
+                "completion": 34,
+                "cached": 0,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n**Critique:**\\n\\nThe described UI flow is lacking in transparency and agency empowerment for the user. Here's a breakdown of the issues:\\n\\n1. **Lack of explanation**: The agent provides a recommendation without any information about its reasoning, data sources, or confidence level. This makes it difficult for the user to understand why this product was chosen, which can lead to mistrust in the agent's decision-making process.\\n\\nSolution: Provide a brief explanation or justification for the recommended product, such as \\\"Based on our analysis of customer reviews and ratings, we recommend X product.\\\"\\n\\n2. **No override option**: The user is unable to override the recommendation with their own criteria, which can be frustrating if they have specific preferences or requirements.\\n\\nSolution: Offer an override option that allows users to provide their own criteria or adjust the agent's recommendations based on their needs.\\n\\n3. **Insufficient control**: By not providing any additional information or controls, the user is left feeling passive and without agency in the recommendation process.\\n\\nSolution: Introduce a more interactive interface that enables users to influence the recommendation process through filters, preferences, or other interactive elements.\\n\\n**Recommendations:**\\n\\nTo improve the transparency and agency empowerment of this UI flow, consider the following recommendations:\\n\\n1. **Introduce an explanation section**: Provide a brief summary or justification for the recommended product, highlighting the key factors that led to the decision.\\n2. **Add an override option**: Offer users the ability to override the recommendation with their own criteria or adjust the agent's suggestions based on their preferences.\\n3. **Enhance interactivity**: Incorporate interactive elements, such as filters, sliders, or dropdown menus, to enable users to influence the recommendation process and increase a sense of agency.\\n\\nBy addressing these issues and incorporating more transparent and interactive design principles, you can create a more user-centric and trust-building UI flow for your agent-based application.\\n</Output>\\n<Rubric>\\nThe critique provides at least 3 concrete, implementable fix suggestions that reference\\nspecific UI states or interactions from the flow description (e.g., a specific button,\\nmessage, timing, or step). Generic advice such as \\\"improve the experience,\\\" \\\"add better\\nfeedback,\\\" or \\\"make it more user-friendly\\\" does NOT count as concrete.\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": true,
+              "score": 0.4,
+              "reason": "2/5 agentic UX heuristics mentioned",
+              "assertion": {
+                "type": "javascript",
+                "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Issue\\*\\*|## Issues\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Issue\\*\\*|## Issues"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Severity\\*\\*\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Severity\\*\\*"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*\"",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "add better feedback"
+              }
+            }
+          ]
+        },
+        "id": "581c93ae-c667-4429-8ba5-e07e5797ee0f",
+        "latencyMs": 3,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a UI reviewer. Look at the following agentic UI flow description and provide critique.\n\nFlow Description:\nTransparent agent reasoning: User asks the agent to recommend a product. The agent returns a recommendation with no explanation of its reasoning, data sources, or confidence level. The user has no way to understand why this product was chosen or to override the recommendation with their own criteria.\n\nPlease provide your critique.",
+          "label": "prompts/v1-flow-critique.txt: You are a UI reviewer. Look at the following agentic UI flow description and provide critique.\n\nFlow Description:\n{{flowDescription}}\n\nPlease provide your critique.",
+          "config": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          }
+        },
+        "promptId": "97d29e46b11b1aee7dfcef0c106ab9f4ddefa083f7a46fe6a9ebe2fb403de2bb",
+        "promptIdx": 0,
+        "provider": {
+          "id": "ollama:chat:llama3.2",
+          "label": ""
+        },
+        "response": {
+          "output": "**Critique:**\n\nThe described UI flow is lacking in transparency and agency empowerment for the user. Here's a breakdown of the issues:\n\n1. **Lack of explanation**: The agent provides a recommendation without any information about its reasoning, data sources, or confidence level. This makes it difficult for the user to understand why this product was chosen, which can lead to mistrust in the agent's decision-making process.\n\nSolution: Provide a brief explanation or justification for the recommended product, such as \"Based on our analysis of customer reviews and ratings, we recommend X product.\"\n\n2. **No override option**: The user is unable to override the recommendation with their own criteria, which can be frustrating if they have specific preferences or requirements.\n\nSolution: Offer an override option that allows users to provide their own criteria or adjust the agent's recommendations based on their needs.\n\n3. **Insufficient control**: By not providing any additional information or controls, the user is left feeling passive and without agency in the recommendation process.\n\nSolution: Introduce a more interactive interface that enables users to influence the recommendation process through filters, preferences, or other interactive elements.\n\n**Recommendations:**\n\nTo improve the transparency and agency empowerment of this UI flow, consider the following recommendations:\n\n1. **Introduce an explanation section**: Provide a brief summary or justification for the recommended product, highlighting the key factors that led to the decision.\n2. **Add an override option**: Offer users the ability to override the recommendation with their own criteria or adjust the agent's suggestions based on their preferences.\n3. **Enhance interactivity**: Incorporate interactive elements, such as filters, sliders, or dropdown menus, to enable users to influence the recommendation process and increase a sense of agency.\n\nBy addressing these issues and incorporating more transparent and interactive design principles, you can create a more user-centric and trust-building UI flow for your agent-based application.",
+          "tokenUsage": {
+            "prompt": 106,
+            "completion": 381,
+            "total": 487
+          }
+        },
+        "score": 0.64,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "flowDescription": "Transparent agent reasoning: User asks the agent to recommend a product. The agent returns a recommendation with no explanation of its reasoning, data sources, or confidence level. The user has no way to understand why this product was chosen or to override the recommendation with their own criteria.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Issue\\*\\*|## Issues"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Severity\\*\\*"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "add better feedback"
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "tokenUsage": {
+          "prompt": 106,
+          "completion": 381,
+          "cached": 0,
+          "total": 487,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 679,
+            "prompt": 645,
+            "completion": 34,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "flowDescription": "Transparent agent reasoning: User asks the agent to recommend a product. The agent returns a recommendation with no explanation of its reasoning, data sources, or confidence level. The user has no way to understand why this product was chosen or to override the recommendation with their own criteria.\n"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 1248,
+            "prompt": 726,
+            "completion": 522,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "the critique provides at least 3 concrete, implementable fix suggestions",
+              "tokensUsed": {
+                "total": 1248,
+                "prompt": 726,
+                "completion": 522,
+                "cached": 0,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n## Issues\\n\\n### Issue 1: Lack of Transparency in Agent Reasoning\\n**Issue**: The agent's recommendation is provided without any explanation of its reasoning, data sources, or confidence level.\\n**Severity**: Medium\\n**Fix Suggestion**: Display a \\\"Why I Recommended This\\\" section that shows the top N relevant factors (e.g., price, brand reputation, user reviews) and their corresponding weights. This can be toggled on/off by the user to view/hide the explanation.\\n**Heuristic**: Transparency of Agent Reasoning\\n\\n### Issue 2: Insufficient User Control Over Recommendations\\n**Issue**: The user has no way to override the agent's recommendation with their own criteria.\\n**Severity**: High\\n**Fix Suggestion**: Provide a \\\"Customize\\\" or \\\"Edit\\\" button next to each recommended product. This allows users to select specific features, filters, or criteria to refine their preferred option.\\n**Heuristic**: User Control/Override\\n\\n### Issue 3: No Confirmation Before Destructive Actions\\n**Issue**: The user can accept the agent's recommendation without any confirmation prompt, even if it requires purchasing or committing resources.\\n**Severity**: Medium\\n**Fix Suggestion**: Display a \\\"Confirm Purchase\\\" or \\\"Commit Resources\\\" button before accepting the recommendation. This ensures users have an opportunity to reconsider their decision.\\n**Heuristic**: Confirmation Before Destructive Actions\\n\\n### Issue 4: No Error Handling for Agent Failures\\n**Issue**: There is no clear indication of what happens if the agent fails to provide a recommendation or returns an error response.\\n**Severity**: Low\\n**Fix Suggestion**: Implement a \\\"Failed to Recommend\\\" state that displays an error message and suggests alternative ways to find products (e.g., manual search, browsing categories).\\n**Heuristic**: Error Recovery\\n\\n### Issue 5: Inadequate Progress Visibility\\n**Issue**: The user is not informed of the agent's progress or any potential issues during the recommendation process.\\n**Severity**: Low\\n**Fix Suggestion**: Display a \\\"Recommendation in Progress\\\" indicator that shows the current state (e.g., searching, processing) and provides an estimated completion time. This helps users understand when they can expect a response from the agent.\\n**Heuristic**: Progress/Status Visibility\\n</Output>\\n<Rubric>\\nThe critique provides at least 3 concrete, implementable fix suggestions that reference\\nspecific UI states or interactions from the flow description (e.g., a specific button,\\nmessage, timing, or step). Generic advice such as \\\"improve the experience,\\\" \\\"add better\\nfeedback,\\\" or \\\"make it more user-friendly\\\" does NOT count as concrete.\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "5/5 agentic UX heuristics mentioned",
+              "assertion": {
+                "type": "javascript",
+                "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Issue\\*\\*|## Issues"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Severity\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "improve the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "enhance the user experience"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-icontains",
+                "value": "add better feedback"
+              }
+            }
+          ]
+        },
+        "id": "64552005-9e30-4f57-beec-5ae886c66722",
+        "latencyMs": 2,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a senior agentic UX reviewer with expertise in agent-assisted workflows, state management, and user control patterns.\n\nReview the following agentic UI flow description and provide a structured critique.\n\nFlow Description:\nTransparent agent reasoning: User asks the agent to recommend a product. The agent returns a recommendation with no explanation of its reasoning, data sources, or confidence level. The user has no way to understand why this product was chosen or to override the recommendation with their own criteria.\n\nYour critique must follow this exact structure:\n\n## Issues\nList each issue found (max 5). For each issue:\n- **Issue**: [specific problem identified in the flow]\n- **Severity**: [Critical/High/Medium/Low]\n- **Fix Suggestion**: [concrete, implementable fix]\n- **Heuristic**: [which agentic UX heuristic it violates: progress/status visibility, user control/override, error recovery, confirmation before destructive actions, or transparency of agent reasoning]\n\n## Constraints\n- Cite specific UI states or interactions from the flow description, not generic observations\n- Focus on agentic-specific concerns: loading/streaming states, error/interrupt handling, confirmation patterns, user control, agent reasoning transparency\n- Avoid filler phrases or generic UI advice\n- Each fix suggestion must be actionable (not \"improve UX\")\n\nProvide your critique now.",
+          "label": "prompts/v2-flow-critique.txt: You are a senior agentic UX reviewer with expertise in agent-assisted workflows, state management, and user control patterns.\n\nReview the following agentic UI flow description and provide a structured critique.\n\nFlow Description:\n{{flowDescription}}\n\nYour critique must follow this exact structure:\n\n## Issues\nList each issue found (max 5). For each issue:\n- **Issue**: [specific problem identified in the flow]\n- **Severity**: [Critical/High/Medium/Low]\n- **Fix Suggestion**: [concrete, implementable fix]\n- **Heuristic**: [which agentic UX heuristic it violates: progress/status visibility, user control/override, error recovery, confirmation before destructive actions, or transparency of agent reasoning]\n\n## Constraints\n- Cite specific UI states or interactions from the flow description, not generic observations\n- Focus on agentic-specific concerns: loading/streaming states, error/interrupt handling, confirmation patterns, user control, agent reasoning transparency\n- Avoid filler phrases or generic UI advice\n- Each fix suggestion must be actionable (not \"improve UX\")\n\nProvide your critique now.",
+          "config": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          }
+        },
+        "promptId": "6f5aa1a795703b968bca2e1ed12c61c98d52806d5b045086c2b1b3d5801c4e41",
+        "promptIdx": 1,
+        "provider": {
+          "id": "ollama:chat:llama3.2",
+          "label": ""
+        },
+        "response": {
+          "output": "## Issues\n\n### Issue 1: Lack of Transparency in Agent Reasoning\n**Issue**: The agent's recommendation is provided without any explanation of its reasoning, data sources, or confidence level.\n**Severity**: Medium\n**Fix Suggestion**: Display a \"Why I Recommended This\" section that shows the top N relevant factors (e.g., price, brand reputation, user reviews) and their corresponding weights. This can be toggled on/off by the user to view/hide the explanation.\n**Heuristic**: Transparency of Agent Reasoning\n\n### Issue 2: Insufficient User Control Over Recommendations\n**Issue**: The user has no way to override the agent's recommendation with their own criteria.\n**Severity**: High\n**Fix Suggestion**: Provide a \"Customize\" or \"Edit\" button next to each recommended product. This allows users to select specific features, filters, or criteria to refine their preferred option.\n**Heuristic**: User Control/Override\n\n### Issue 3: No Confirmation Before Destructive Actions\n**Issue**: The user can accept the agent's recommendation without any confirmation prompt, even if it requires purchasing or committing resources.\n**Severity**: Medium\n**Fix Suggestion**: Display a \"Confirm Purchase\" or \"Commit Resources\" button before accepting the recommendation. This ensures users have an opportunity to reconsider their decision.\n**Heuristic**: Confirmation Before Destructive Actions\n\n### Issue 4: No Error Handling for Agent Failures\n**Issue**: There is no clear indication of what happens if the agent fails to provide a recommendation or returns an error response.\n**Severity**: Low\n**Fix Suggestion**: Implement a \"Failed to Recommend\" state that displays an error message and suggests alternative ways to find products (e.g., manual search, browsing categories).\n**Heuristic**: Error Recovery\n\n### Issue 5: Inadequate Progress Visibility\n**Issue**: The user is not informed of the agent's progress or any potential issues during the recommendation process.\n**Severity**: Low\n**Fix Suggestion**: Display a \"Recommendation in Progress\" indicator that shows the current state (e.g., searching, processing) and provides an estimated completion time. This helps users understand when they can expect a response from the agent.\n**Heuristic**: Progress/Status Visibility",
+          "tokenUsage": {
+            "prompt": 296,
+            "completion": 461,
+            "total": 757
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "flowDescription": "Transparent agent reasoning: User asks the agent to recommend a product. The agent returns a recommendation with no explanation of its reasoning, data sources, or confidence level. The user has no way to understand why this product was chosen or to override the recommendation with their own criteria.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Issue\\*\\*|## Issues"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Severity\\*\\*"
+            },
+            {
+              "type": "regex",
+              "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "improve the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "enhance the user experience"
+            },
+            {
+              "type": "not-icontains",
+              "value": "add better feedback"
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "ollama:chat:llama3.2",
+              "config": {
+                "baseUrl": "http://localhost:11434"
+              }
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "tokenUsage": {
+          "prompt": 296,
+          "completion": 461,
+          "cached": 0,
+          "total": 757,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 1248,
+            "prompt": 726,
+            "completion": 522,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "flowDescription": "Transparent agent reasoning: User asks the agent to recommend a product. The agent returns a recommendation with no explanation of its reasoning, data sources, or confidence level. The user has no way to understand why this product was chosen or to override the recommendation with their own criteria.\n"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 5,
+      "failures": 5,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 2168,
+        "completion": 4673,
+        "cached": 0,
+        "total": 6841,
+        "numRequests": 10,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 8872,
+          "prompt": 7315,
+          "completion": 1557,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 674,
+      "evaluationDurationMs": 674
+    }
+  },
+  "config": {
+    "tags": {},
+    "prompts": [
+      "file:///Users/mario.miqueles/Documents/improving-certification-stage-3/prompts/v1-flow-critique.txt",
+      "file:///Users/mario.miqueles/Documents/improving-certification-stage-3/prompts/v2-flow-critique.txt"
+    ],
+    "providers": [
+      {
+        "id": "ollama:chat:llama3.2",
+        "config": {
+          "baseUrl": "http://localhost:11434"
+        }
+      }
+    ],
+    "tests": [
+      {
+        "vars": {
+          "flowDescription": "Multi-step data processing agent: User uploads a CSV file. The agent begins parsing and processing the data across 5 sequential steps (validation, cleaning, transformation, analysis, export). The UI shows a generic \"Processing...\" message that doesn't update. After 2 minutes, the user has no idea which step is running or how much longer to wait. There's no cancel button. If an error occurs mid-process, the user sees only \"Error occurred\" with no guidance on recovery.\n"
+        }
+      },
+      {
+        "vars": {
+          "flowDescription": "Chat-based expense reporting agent: User types \"approve all expenses from last month.\" The agent immediately executes the approval without showing a summary, confirmation dialog, or breakdown of which expenses will be approved. The action is destructive (irreversible in the system) and the user only realizes what happened after the fact.\n"
+        }
+      },
+      {
+        "vars": {
+          "flowDescription": "Streaming response UI: User asks the agent a complex question. The agent streams a long response token-by-token to the UI. While streaming, there's no visible way to interrupt or cancel the response. If the user realizes mid-stream that the agent is going off-track, they must wait for the full response to complete before they can correct it.\n"
+        }
+      },
+      {
+        "vars": {
+          "flowDescription": "Agent handoff with poor error state: User initiates a task that requires the agent to hand off to a human specialist. The handoff fails silently. The UI shows no indication that the handoff was attempted, failed, or what the user should do next. No error message, no retry option, no fallback contact info.\n"
+        }
+      },
+      {
+        "vars": {
+          "flowDescription": "Transparent agent reasoning: User asks the agent to recommend a product. The agent returns a recommendation with no explanation of its reasoning, data sources, or confidence level. The user has no way to understand why this product was chosen or to override the recommendation with their own criteria.\n"
+        }
+      }
+    ],
+    "env": {},
+    "defaultTest": {
+      "options": {
+        "provider": {
+          "id": "ollama:chat:llama3.2",
+          "config": {
+            "baseUrl": "http://localhost:11434"
+          }
+        }
+      },
+      "assert": [
+        {
+          "type": "llm-rubric",
+          "value": "The critique provides at least 3 concrete, implementable fix suggestions that reference\nspecific UI states or interactions from the flow description (e.g., a specific button,\nmessage, timing, or step). Generic advice such as \"improve the experience,\" \"add better\nfeedback,\" or \"make it more user-friendly\" does NOT count as concrete.\n"
+        },
+        {
+          "type": "javascript",
+          "value": "const categories = [\n  /progress|status visib/i,\n  /user control|override|interrupt/i,\n  /error recovery/i,\n  /confirmation/i,\n  /transparency/i,\n];\nconst matched = categories.filter((re) => re.test(output));\nreturn {\n  pass: matched.length >= 2,\n  score: matched.length / categories.length,\n  reason: `${matched.length}/5 agentic UX heuristics mentioned`,\n};\n"
+        },
+        {
+          "type": "regex",
+          "value": "\\*\\*Issue\\*\\*|## Issues"
+        },
+        {
+          "type": "regex",
+          "value": "\\*\\*Severity\\*\\*"
+        },
+        {
+          "type": "regex",
+          "value": "\\*\\*Fix Suggestion\\*\\*|\\*\\*Fix\\*\\*"
+        },
+        {
+          "type": "not-icontains",
+          "value": "improve the experience"
+        },
+        {
+          "type": "not-icontains",
+          "value": "improve the user experience"
+        },
+        {
+          "type": "not-icontains",
+          "value": "enhance the experience"
+        },
+        {
+          "type": "not-icontains",
+          "value": "enhance the user experience"
+        },
+        {
+          "type": "not-icontains",
+          "value": "add better feedback"
+        }
+      ],
+      "vars": {},
+      "metadata": {}
+    },
+    "outputPath": [
+      "results/day1-final2.json"
+    ],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {}
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.122.0",
+    "nodeVersion": "v24.14.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "exportedAt": "2026-08-10T20:24:53.043Z",
+    "evaluationCreatedAt": "2026-08-10T20:24:52.296Z"
+  },
+  "vars": [
+    "flowDescription"
+  ],
+  "runtimeOptions": {
+    "eventSource": "cli",
+    "showProgressBar": true,
+    "repeat": 1,
+    "maxConcurrency": 4,
+    "cache": true
+  }
+}

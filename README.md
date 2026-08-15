@@ -72,10 +72,12 @@ This opens a local web interface showing scores, outputs, and side-by-side compa
 ├── progress.txt                       # Working notes (iteration log)
 ├── prompts/
 │   ├── v1-flow-critique.txt          # Baseline/naive prompt (under-specified)
-│   └── v2-flow-critique.txt          # Improved prompt (structured, heuristic-grounded)
+│   ├── v2-flow-critique.txt          # Improved prompt (structured, heuristic-grounded) - recommended
+│   └── v3-flow-critique.txt          # Day 5 experiment (fabrication fix attempt) - not an improvement, kept as documented result
 ├── testcases/
-│   └── fixtures.yaml                 # 5 realistic agentic UI flow scenarios
-└── results/                           # Evaluation outputs (generated)
+│   └── fixtures.yaml                 # 8 agentic UI flow scenarios
+└── results/
+    └── day6-results.json             # Canonical exported eval results (committed, not generated-only)
 ```
 
 ## Evaluation Rubric
@@ -115,37 +117,42 @@ This is why generation and grading now use two different local models: the 2GB m
 
 ## Quantified Improvement Evidence
 
-Measured via `npm run eval` on 2026-08-10 (Ollama `llama3.2`, 5 real-world agentic UI flow fixtures, both prompts graded against the same 4-criteria rubric above):
+### Final numbers (as of Day 6)
 
-### Baseline (v1)
-- **Pass rate**: 0% (0/5 test cases meet all criteria)
-- v1 fails the structure check every time (it was never instructed to use an Issue/Severity/Fix format), and its critiques tend to lean on generic framing ("...to improve the user experience") even when some individual suggestions are reasonable.
+Canonical, reproducible export: **[`results/day6-results.json`](results/day6-results.json)** — `npm run eval -- --no-cache --output results/day6-results.json` (eval ID `eval-8ua-2026-08-15T14:29:24`), 8 fixtures × 3 prompt versions = 24 test cases, graded against the current 5-criteria rubric above.
 
-### Improved (v2)
-- **Pass rate**: 100% (5/5 test cases meet all criteria)
-- v2 consistently follows the required structure, cites specific UI states from each flow, and labels each issue with a specific heuristic.
+| Version | Pass rate | Takeaway |
+|---|---|---|
+| **v1** (baseline) | 0/8 (0%) | Fails structure every time (never instructed to use an Issue/Severity/Fix format); leans on generic framing even when individual suggestions are reasonable. |
+| **v2** (improved) | 8/8 (100%) | **Recommended prompt.** Consistently structured, cites specific UI states, labels a heuristic per issue — but see the caveat below: it also fabricates issues on well-designed flows, which this rubric can't yet detect. |
+| **v3** (Day 5 experiment) | 4/8 (50%) | Attempted fix for v2's fabrication problem; did not work and is *not* an improvement over v2 — kept as a documented negative result. |
 
-**Improvement**: +100 percentage points in pass rate (0% → 100%) on this rubric and fixture set. Full per-assertion results are in `results/day1-results.json`.
+**Important caveat**: pass/fail is intentionally strict (requires every criterion simultaneously), and a "pass" measures *structure + specificity + non-genericness* — it does **not** verify that flagged issues are real. Fixture 8 ("well-designed export flow," which has no genuine UX problems) still causes v2 to score 100% by fabricating plausible-sounding issues. Treat these percentages as directional evidence of prompt-structure quality for this suite, not a universal correctness score. Full details on this gap are in the Day 4/5 log entries below.
 
-Note: pass/fail here is intentionally strict — it requires meeting every criterion simultaneously (structure AND actionability AND heuristic coverage AND no filler). This is a demonstration rubric across 5 fixtures on a single local model; treat the percentages as directional evidence for this suite, not a universal quality score.
+### Investigation Log (Day 1 → Day 5)
 
-**Day 3 update**: after splitting actionability into two binary sub-criteria, adding a 6th fixture (legal research agent), and fixing the grading-reliability issue described above (moved grading to `llama3.1:8b`, `temperature: 0`), the final Day 3 run (`eval-cuX-2026-08-12T17:48:25`, 6 fixtures × 2 prompts) shows:
-- **v1**: 0/6 pass (0%) — fails only on `structure-*` in every case; `actionability-specificity`/`actionability-concreteness` now pass for v1 too (some of its suggestions genuinely are concrete, just never in the required format).
-- **v2**: 6/6 pass (100%) — passes every criterion, every fixture.
+<details>
+<summary>Click to expand the day-by-day narrative behind the numbers above</summary>
 
-This is a cleaner, more trustworthy result than the intermediate runs during the investigation above (which used the unreliable 2GB grading model and produced a misleadingly low 1/6 pass rate for v2). Verified stable across 2 repeated runs (0 inconsistencies).
+**Day 1 baseline** — Measured via `npm run eval` on 2026-08-10 (5 fixtures, v1 vs v2, original 4-criteria rubric): v1 = 0/5 (0%), v2 = 5/5 (100%). v1 fails the structure check every time and leans on generic framing ("...to improve the user experience") even when some individual suggestions are reasonable; v2 consistently follows the required structure, cites specific UI states, and labels each issue with a specific heuristic. **Improvement**: +100 percentage points in pass rate (0% → 100%) on this rubric and fixture set. Full per-assertion results: **[`results/day1-results.json`](results/day1-results.json)** (this file existed locally since Day 1 but was gitignored and never actually committed until the Day 6 cleanup below — now it's real, committed evidence).
+
+**Day 3 update**: after splitting actionability into two binary sub-criteria, adding a 6th fixture (legal research agent), and fixing a grading-reliability issue (moved grading to `llama3.1:8b`, `temperature: 0` — see Evaluation Rubric section above), the final Day 3 run (`eval-cuX-2026-08-12T17:48:25`, 6 fixtures × 2 prompts) showed v1 = 0/6 (0%), v2 = 6/6 (100%) — a cleaner, more trustworthy result than the intermediate runs during that investigation (which used the unreliable 2GB grading model and produced a misleadingly low 1/6 pass rate for v2). Verified stable across 2 repeated runs (0 inconsistencies).
 
 **Day 4 update — stress-test with a bad flow and a well-designed flow**: added fixtures 7 ("Compounding failures") and 8 ("Well-designed export flow") specifically to check whether the rubric behaves sensibly at the extremes. `npm run eval --no-cache` (`eval-CIY-2026-08-13T13:26:24`, 8 fixtures × 2 prompts): v1 = 0/8 (0%), v2 = 8/8 (100%) — same pattern as Day 3.
 
 The compounding-failures fixture worked as intended (v2 correctly flagged the irreversible-submission issue as top severity among several). **The well-designed fixture did not** — v2 still passed all 6 criteria by fabricating 5 issues on a flow that has no real problems (e.g., flagging "inadequate confirmation before destructive actions" on a flow that explicitly has a confirmation dialog). v1 was comparatively more honest (it opened with a "Strengths" section) but still manufactured some generic critique.
 
-**This is a known, currently-unresolved gap, not a hidden one**: neither prompt has permission to report "no significant issues found," and the rubric's requirement for ≥3 concrete fixes structurally rewards inventing problems on a clean design with a full pass. v2's 100% pass rate above should be read as "v2 always produces a well-structured, heuristic-labeled, non-generic critique" — not as "v2 always correctly identifies real problems." Fixing this (giving the prompt permission to report no issues, and adjusting the rubric so that legitimate "no issues" critique isn't penalized) is queued for Day 5's prompt iteration. See `progress.txt` Day 4 notes for the full critique text and reasoning.
+This is a known, currently-unresolved gap, not a hidden one: neither prompt has permission to report "no significant issues found," and the rubric's requirement for ≥3 concrete fixes structurally rewards inventing problems on a clean design with a full pass. v2's 100% pass rate should be read as "v2 always produces a well-structured, heuristic-labeled, non-generic critique" — not as "v2 always correctly identifies real problems." Fixing this was queued for Day 5's prompt iteration. See `progress.txt` Day 4 notes for the full critique text and reasoning.
 
-**Day 5 update — v3 attempted to fix the fabrication gap, and did not succeed**: `prompts/v3-flow-critique.txt` adds explicit permission to respond "No significant issues found" plus a "do not fabricate/nitpick cosmetics" rule, and `promptfooconfig.yaml`'s rubric was updated (OR-clauses on `structure-severity-marker`/`structure-fix-marker`/`heuristic-coverage`, updated `actionability-*` wording) so a correct no-issues response wouldn't be automatically penalized. `npm run eval --no-cache` (`eval-iuL-2026-08-14T14:30:26`, 8 fixtures × 3 prompts) result: **v1 = 0/8, v2 = 8/8, v3 = 4/8** — v3 scored worse than v2.
+**Day 5 update — v3 attempted to fix the fabrication gap, and did not succeed**: `prompts/v3-flow-critique.txt` adds explicit permission to respond "No significant issues found" plus a "do not fabricate/nitpick cosmetics" rule, and `promptfooconfig.yaml`'s rubric was updated (OR-clauses on `structure-severity-marker`/`structure-fix-marker`/`heuristic-coverage`, updated `actionability-*` wording) so a correct no-issues response wouldn't be automatically penalized. `npm run eval --no-cache` (`eval-iuL-2026-08-14T14:30:26`, 8 fixtures × 3 prompts) result: v1 = 0/8, v2 = 8/8, v3 = 4/8 — v3 scored worse than v2.
 
 v3 still fabricated 5 issues on the well-designed flow (same defect as v2), and introduced two new artifacts: a contradictory trailing "No significant issues found." line appended *after* a correct 5-issue critique on the compounding-failures fixture, and a spurious echoed `## Constraints` section in several outputs that confused the grader. A simplified single-template rewrite was tried as a second attempt (`eval-ELw-2026-08-14T15:46:18`, v3 only) but regressed further — 0/8 pass, and the model now stops after finding just 1 issue on flows with multiple genuine problems.
 
 **Conclusion**: `prompts/v3-flow-critique.txt` in this repo is attempt 1 (the better of the two, kept as an honest documented result) — not a working fix. **v2 remains the best-performing, recommended prompt.** The fabrication gap appears to need more than prompt wording changes on this 2GB generation model to resolve; candidates for a future attempt include a bigger local generation model (mirroring the Day 3 grading-model fix) or a concrete few-shot example of a correct "no issues" response. See `progress.txt` Day 5 notes for full critique text and root-cause analysis.
+
+**Day 6 correction note**: while preparing the final `results/day6-results.json` export, discovered that a Day 5 file edit meant to revert `prompts/v3-flow-critique.txt` back to "attempt 1" had silently failed to persist — the file committed at the end of Day 5 was actually "attempt 2" (the worse, simplified rewrite), even though Day 5's write-up described attempt 1 as the kept version. This was caught because Day 6's fresh eval run produced v3 = 0/8 instead of the previously-reported 4/8. Fixed by rewriting the file directly via shell and re-verifying with a fresh `--no-cache` run, which reproduced the original 4/8 result exactly, confirming the fix. The `results/day6-results.json` file linked above reflects the corrected, verified `v3-flow-critique.txt`.
+
+</details>
 
 ## Version History
 
@@ -244,7 +251,7 @@ Then email the repo link to `Tim.Rayburn@improving.com` with subject **"Stage 3 
 
 - All prompt templates are in `/prompts` with version headers for clarity
 - Test fixtures are in `testcases/fixtures.yaml` as YAML vars consumed by promptfoo
-- Evaluation results are cached in `.promptfoo/` (gitignored)
+- Promptfoo's internal run cache/history lives in `.promptfoo/` (gitignored) — that's separate from `results/`, which holds the canonical exported JSON snapshot(s) and *is* committed (as of Day 6) so the numbers in this README are backed by a real, inspectable file
 - Each iteration (v1 → v2 → v3) is a separate git commit, showing the version history required for certification
 
 ---
