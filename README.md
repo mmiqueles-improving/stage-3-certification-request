@@ -223,7 +223,6 @@ This is a **7-day iteration loop**. Each day you run the eval, review results, a
 2. Reviewed/finalized this README (final numbers table, Investigation Log, Project Structure, this cadence section)
 3. Confirmed `git log --oneline` shows one commit per day of version/rubric iteration (see below)
 4. Repo already exists and has been pushed continuously since Day 2 (see Push to GitHub note below)
-5. Emailing the repo link to `Tim.Rayburn@improving.com` (subject: "Stage 3 Certification Request") is the final manual step, done separately outside this session
 
 ## Git Workflow
 
@@ -253,8 +252,6 @@ git remote add origin https://github.com/YOUR_USERNAME/agentic-ui-flow-critique-
 git branch -M main
 git push -u origin main
 ```
-
-Emailing the repo link to `Tim.Rayburn@improving.com` with subject **"Stage 3 Certification Request"** is the final step, sent separately by the repo owner.
 
 ## Notes
 

@@ -93,7 +93,6 @@ Goal: fix the exact defect validated on Day 4 (v2 fabricates issues on the well-
 - [x] Started `npm run view` (an instance was already running from earlier in the session) and opened a live browser preview at `localhost:15500` showing all 3 prompts side-by-side using today's fresh Day 7 data.
 - [x] Final README polish: updated "Final numbers" section to cite Day 7 as canonical, added file links for the newly backfilled Day 3/4/5 results, extended the Investigation Log with a Day 7 closing entry, updated Project Structure to list all 6 result files, and corrected the Daily Testing Cadence / Push to GitHub sections to reflect that the repo already exists and has been pushed continuously since Day 2 (rather than reading as an unstarted task).
 - [x] Confirmed `git log --oneline` shows one commit per day (Day 2 → Day 6, plus 3 initial Day 1 setup/fix commits) — clean version history for certification review.
-- [x] Per user instruction, did **not** send the certification email — that's the user's own final step, outside this session.
 
 ## Closing Summary (7-Day Retrospective)
 - **v1 → v2** was a clear, validated improvement: 0% → 100% pass rate, driven by giving the model a persona, explicit output structure, and constraints — not just a longer prompt.
@@ -109,7 +108,7 @@ Goal: fix the exact defect validated on Day 4 (v2 fabricates issues on the well-
 - [x] Day 4: Stress-test rubric with bad vs. well-designed flows
 - [x] Day 5: Iterate prompt (v3), run eval with all 3 versions — v3 did not fix the fabrication defect (see Day 5 notes); v2 remains the best-performing prompt.
 - [x] Day 6: Export results, finalize metrics in README. Found and corrected a Day 5 file-persistence bug in the process (see Day 6 notes) — final verified numbers: v1=0/8, v2=8/8, v3=4/8.
-- [x] Day 7: Final eval, backfilled results/ to 6 files, git log confirmed, README finalized. Email is the user's own final step (not sent by the assistant).
+- [x] Day 7: Final eval, backfilled results/ to 6 files, git log confirmed, README finalized.
 
 ## Notes
 - Ollama models (as of Day 3): `llama3.2` (2GB) for generation, `llama3.1:8b` (4.9GB) for grading — two different local models, on purpose (see Day 3 continued section). Both pulled locally; update `promptfooconfig.yaml` if you switch either.
